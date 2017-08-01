@@ -13,7 +13,7 @@ class LoginNavBar extends React.Component {
                             <span className="icon-bar bar2"></span>
                             <span className="icon-bar bar3"></span>
                         </button>
-                        <a className="navbar-brand" href="profile.html">Ifocop Rs</a>
+                        <a className="navbar-brand" href="#">Ifocop Rs</a>
                     </div>
                 </div>
             </nav>

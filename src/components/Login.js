@@ -2,6 +2,7 @@ import React from 'react';
 import Footer from './Footer';
 import LoginNavBar from './LoginNavBar';
 import LoginFormLogin from './LoginFormLogin';
+import LoginFormSignUp from "./LoginFormSignUp";
 
 class Login extends React.Component {
     render() {
@@ -15,6 +16,7 @@ class Login extends React.Component {
                             <div className="col-sm-10 col-sm-push-1 col-md-6 col-md-push-3 col-lg-6 col-lg-push-3">
                                 <div className="card-group animated flipInX">
                                     <LoginFormLogin/>
+                                    <LoginFormSignUp/>
                                 </div>
                             </div>
                         </div>
