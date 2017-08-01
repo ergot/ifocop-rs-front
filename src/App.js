@@ -9,12 +9,11 @@ class App extends Component {
         this.state= {}
     }
 
-
   render() {
     return (
-        <body>
+        <div>
           <Login/>
-        </body>
+        </div>
     );
   }
 }
