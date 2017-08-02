@@ -9,12 +9,12 @@ class LoginFormSignUp extends React.Component {
         name: '',
         email: '',
         password: '',
-        messageError: ''
-    }
+        messageForm: ''
+    };
 
 
     handleSubmit = (event) =>{
-        event.preventDefault()
+        event.preventDefault();
         let $this = this;
 
         request
@@ -23,16 +23,19 @@ class LoginFormSignUp extends React.Component {
             .end(function(err, res) {
 
                 if(res.statusCode === 200) {
-                    console.log('--- inscription valide')
-                    $this.setState({messageError:''})
-                    return console.log(res)
+                    console.log('--- inscription valide ---');
+                    $this.setState({messageForm: 'Consulter votre email pour valider le compte'})
+                    $this.messageForm.className = 'text-success';
+                    $this.setState({name:''});
+                    console.log(res)
                 } else {
-                    console.log('--- inscription non complété')
+                    console.log('--- inscription non valide ---');
+                    $this.messageForm.className = 'text-danger';
+                    $this.setState({messageForm:res.body.error.message});
                     console.log(res.body.error.message)
-                    $this.setState({messageError:res.body.error.message})
                 }
             });
-    }
+    };
 
     render() {
         return (
@@ -41,7 +44,11 @@ class LoginFormSignUp extends React.Component {
                     <div className="center">
                         <h4 className="m-b-0"><span className="icon-text">Inscription</span></h4>
                         <p className="text-muted">Création de compte</p>
-                        <p className="text-danger">{this.state.messageError}</p>
+                        <p  ref={ (messageForm)=> {
+                                    this.messageForm  = messageForm
+                                }}
+                            className="">{this.state.messageForm}
+                            </p>
                     </div>
                     <form action="#" onSubmit={this.handleSubmit}>
                         <div className="form-group">
