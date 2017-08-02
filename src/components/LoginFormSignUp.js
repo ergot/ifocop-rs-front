@@ -1,6 +1,6 @@
 import React from 'react';
 // import Axios from "axios";
-import request from "superagent"
+import request from "superagent";
 
 
 class LoginFormSignUp extends React.Component {
