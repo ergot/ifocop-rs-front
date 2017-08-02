@@ -8,13 +8,10 @@ class LoginFormLogin extends React.Component {
 
     submit = () => {
         let $this = this;
-
         request
             .post('http://localhost:3000/api/myUsers/login')
             .send({password:this.password.value, email:this.email.value})
             .end(function(err, res) {
-                console.log(err)
-                console.log(res.body)
                 if(res.statusCode === 200) {
                     console.log('--- log in valide ---');
                     console.log(res.body)
@@ -26,6 +23,29 @@ class LoginFormLogin extends React.Component {
                 }
             });
     }
+    forgotPassword = () => {
+
+        if(this.email.value === ''){
+            this.messageForm.className = 'text-warning';
+            this.setState({messageForm: 'merci de remplir le champ email'});
+        } else {
+            let $this = this;
+            request
+                .post('http://localhost:3000/api/myUsers/reset')
+                .send({email:this.email.value})
+                .end(function(err, res) {
+                    if(res.statusCode === 204) {
+                        console.log('--- password reset valid ---');
+                        $this.messageForm.className = 'text-success';
+                        $this.setState({messageForm:'Merci de consulter votre adresse email'});
+                    } else {
+                        console.log('--- password reset non valide ---');
+                        $this.messageForm.className = 'text-danger';
+                        $this.setState({messageForm:res.body.error.message});
+                    }
+                });
+        }
+    };
 
     render() {
         return (
@@ -49,7 +69,7 @@ class LoginFormLogin extends React.Component {
                             <input type="password" className="form-control" placeholder="Password"
                                    ref={(input)=>{this.password = input}}></input>
                             <a href="#" className="pull-xs-right">
-                                <small>Forgot?</small>
+                                <small onClick={this.forgotPassword}>Forgot?</small>
                             </a>
                             <div className="clearfix"></div>
                         </div>
