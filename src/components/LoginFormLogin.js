@@ -3,13 +3,18 @@ import React from 'react';
 import request from 'superagent';
 
 class LoginFormLogin extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       messageForm: undefined,
     };
     this.submit = this.submit.bind(this);
     this.forgotPassword = this.forgotPassword.bind(this);
+    this.moveToHome = this.moveToHome.bind(this);
+  }
+
+  moveToHome() {
+    this.props.history.push('/home');
   }
 
   submit() {
@@ -22,6 +27,7 @@ class LoginFormLogin extends React.Component {
           console.log('--- log in valide ---');
           console.log(res.body);
           APP.setState({ token: res.body });
+          $this.moveToHome();
         } else {
           console.log('--- log in non valide ---');
           console.log(res.body.error.message);

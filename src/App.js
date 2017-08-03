@@ -19,8 +19,8 @@ window.APP.reducer = (action) => {
 };
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = { token: undefined};
     this.getState = this.getState.bind(this);
     window.APP.getState = this.getState;
@@ -38,7 +38,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Login />
+        <Login history = {this.props.history} />
       </div>
     );
   }
