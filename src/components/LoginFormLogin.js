@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React from 'react';
 import request from 'superagent';
 
@@ -20,6 +21,7 @@ class LoginFormLogin extends React.Component {
         if (res.statusCode === 200) {
           console.log('--- log in valide ---');
           console.log(res.body);
+          APP.setState({ token: res.body });
         } else {
           console.log('--- log in non valide ---');
           console.log(res.body.error.message);
