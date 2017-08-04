@@ -1,11 +1,32 @@
 import React from 'react';
+import Header from './template/Header'
+import Footer from "./Footer";
+import HomeLeftLinks from './HomeLeftLinks'
+import HomeCenterPosts from './HomeCenterPosts'
 
 class Home extends React.Component {
-    render() {
-        return (
-            <p>ici la home</p>
-        )
-    }
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+        <div>
+            <Header/>
+            <div className="container page-content">
+                <div className="row">
+                    {/*<!-- left links -->*/}
+                    <HomeLeftLinks/>
+                    {/*<!-- center posts -->*/}
+                    <HomeCenterPosts/>
+                </div>
+
+            </div>
+            <Footer/>
+        </div>
+
+    );
+  }
 }
 
 export default Home;
