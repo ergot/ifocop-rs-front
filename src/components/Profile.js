@@ -1,11 +1,10 @@
 import React from 'react';
 import Header from './template/Header';
 import Footer from './Footer';
-import HomeLeftLinks from './HomeLeftLinks';
-import HomeCenterPosts from './HomeCenterPosts';
 import ProfileBigPicture from './ProfileBigPicture';
 import ProfileNavTab from './ProfileNavTab';
-import ProfileTimeLine from './ProfileTimeLine'
+import ProfileTimeLine from './ProfileTimeLine';
+import ProfileAbout from './ProfileAbout';
 
 class Profile extends React.Component {
   constructor(props) {
@@ -29,11 +28,13 @@ class Profile extends React.Component {
               <div className="row" >
                 {/* nav tab */}
                 <ProfileNavTab />
-                  {/* Tab panes */}
-                  <div className="tab-content">
-                      {/* timeline */}
-                      <ProfileTimeLine/>
-                  </div>
+                {/* Tab panes */}
+                <div className="tab-content">
+                  {/* timeline */}
+                  <ProfileTimeLine />
+                  {/* about */}
+                  <ProfileAbout />
+                </div>
               </div>
             </div>
           </div>
