@@ -1,6 +1,7 @@
 import React from 'react';
 import ProfileTimeLineWidget from './ProfileTimeLineWidget'
 import ProfileTimeLineWidgetFriends from './ProfileTimeLineWidgetFriends'
+import ProfileTimeLinePosts from './ProfileTimeLinePosts'
 
 
 class ProfileTimeLine extends React.Component {
@@ -16,6 +17,9 @@ class ProfileTimeLine extends React.Component {
             <div className="col-md-5">
               <ProfileTimeLineWidget/>
               <ProfileTimeLineWidgetFriends/>
+            </div>
+            <div className="col-md-7">
+            <ProfileTimeLinePosts/>
             </div>
 
           </div>
