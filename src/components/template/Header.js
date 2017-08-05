@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 
 
 class Header extends React.Component {
@@ -17,12 +18,15 @@ class Header extends React.Component {
               <span className="icon-bar" />
               <span className="icon-bar" />
             </button>
-            <a className="navbar-brand" href="index.html"><b>Ifocop Rs</b></a>
+            {/*<a className="navbar-brand" href="index.html"><b>Ifocop Rs</b></a>*/}
+            <Link className="navbar-brand" to={'/home'}><b>Ifocop Rs</b></Link>
+
           </div>
           <div id="navbar" className="navbar-collapse collapse">
             <ul className="nav navbar-nav navbar-right">
-              <li className="actives"><a href="profile.html">Profile</a></li>
-              <li><a href="home.html">Home</a></li>
+              {/*<li className="actives"><a href="profile.html">Profile</a></li>*/}
+              <li className="actives"><Link to={'profile'}>Profile</Link></li>
+              <li><Link to={'/home'}>Home</Link></li>
               <li className="dropdown">
                 <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                     Pages <span className="caret" />
