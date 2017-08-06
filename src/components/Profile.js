@@ -5,6 +5,7 @@ import ProfileBigPicture from './ProfileBigPicture';
 import ProfileNavTab from './ProfileNavTab';
 import ProfileTimeLine from './ProfileTimeLine';
 import ProfileAbout from './ProfileAbout';
+import ProfileFriends from './ProfileFriends'
 
 class Profile extends React.Component {
   constructor(props) {
@@ -34,6 +35,8 @@ class Profile extends React.Component {
                   <ProfileTimeLine />
                   {/* about */}
                   <ProfileAbout />
+                    {/* friends*/}
+                    <ProfileFriends />
                 </div>
               </div>
             </div>
