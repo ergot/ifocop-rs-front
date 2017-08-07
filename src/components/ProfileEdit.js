@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import ProfileEditInput from './ProfileEditInput';
+import request from 'superagent';
 
 class ProfileEdit extends React.Component {
   constructor(props) {
@@ -13,7 +14,20 @@ class ProfileEdit extends React.Component {
 
   submitForm() {
     console.log('--- submit profile edit ---');
-    console.log(this.state);
+    const APP = window.APP.reducer({ type: 'GETSTATE' });
+
+    request
+      .patch(`${APP.server.url}/myUsers/${APP.token.userId}`)
+      .set('Authorization', APP.token.id)
+      .send(this.state)
+      .end((err, res) => {
+        console.log(res.body);
+        if (res.statusCode === 200) {
+          console.log('--- edit profil valid ---');
+        } else {
+          console.log('--- edit profil NON valid ---');
+        }
+      });
   }
 
   updateStateParent(label, value) {
@@ -33,14 +47,14 @@ class ProfileEdit extends React.Component {
               <div className="row">
                 <div className="col-md-10 col-md-offset-1">
                   <form className="form-horizontal">
-                    <ProfileEditInput label="Nom" updateStateParent={this.updateStateParent} />
-                    <ProfileEditInput label="Prénom" updateStateParent={this.updateStateParent} />
-                    <ProfileEditInput label="Pseudo" updateStateParent={this.updateStateParent} />
-                    <ProfileEditInput label="Mail" updateStateParent={this.updateStateParent} />
-                    <ProfileEditInput label="Coordonnées" updateStateParent={this.updateStateParent} />
-                    <ProfileEditInput label="Age" updateStateParent={this.updateStateParent} />
-                    <ProfileEditInput label="Présentation" updateStateParent={this.updateStateParent} />
-                    <ProfileEditInput label="Photo" updateStateParent={this.updateStateParent} />
+                    <ProfileEditInput label="Nom" updateStateParent={this.updateStateParent} id="name" />
+                    <ProfileEditInput label="Prénom" updateStateParent={this.updateStateParent} id="firstName" />
+                    <ProfileEditInput label="Pseudo" updateStateParent={this.updateStateParent} id="pseudo" />
+                    {/* <ProfileEditInput label="Mail" updateStateParent={this.updateStateParent} id="email"/> */}
+                    <ProfileEditInput label="Coordonnées" updateStateParent={this.updateStateParent} id="coordinates" />
+                    <ProfileEditInput label="Age" updateStateParent={this.updateStateParent} id="age" />
+                    <ProfileEditInput label="Présentation" updateStateParent={this.updateStateParent} id="presentation" />
+                    <ProfileEditInput label="Photo" updateStateParent={this.updateStateParent} id="picture" />
                   </form>
                   <p className="text-center">
                     <a href="#" className="btn btn-custom-primary" onClick={this.submitForm}>

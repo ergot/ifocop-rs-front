@@ -21,7 +21,13 @@ window.APP.reducer = (action) => {
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { token: undefined};
+    this.state = {
+      token: undefined,
+      server: {
+        url: 'http://localhost:3000/api',
+      },
+
+    };
     this.getState = this.getState.bind(this);
     window.APP.getState = this.getState;
     this.dispatch = this.dispatch.bind(this);
@@ -38,7 +44,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Login history = {this.props.history} />
+        <Login history={this.props.history} />
       </div>
     );
   }
