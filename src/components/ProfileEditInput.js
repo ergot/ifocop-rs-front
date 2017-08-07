@@ -10,7 +10,7 @@ class ProfileEditInput extends React.Component {
 
   handleChange(event) {
     this.setState({ value: event.target.value }, () => {
-        this.props.updateStateParent(this.props.label.toLowerCase(), this.state.value);
+        this.props.updateStateParent(this.props.id, this.state.value);
     });
   }
 
@@ -22,8 +22,8 @@ class ProfileEditInput extends React.Component {
         <div className="col-sm-4">
           <input
             type="text"
-            id={this.props.label.toLowerCase()}
-            name={this.props.label.toLowerCase()}
+            id={this.props.id}
+            name={this.props.id}
             className="form-control"
             value={this.state.value}
             onChange={this.handleChange}
