@@ -43,7 +43,7 @@ class ProfileEdit extends React.Component {
                     <ProfileEditInput label="Photo" updateStateParent={this.updateStateParent} />
                   </form>
                   <p className="text-center">
-                    <a href="#" className="btn btn-custom-primary" onClick={this.submitForm()}>
+                    <a href="#" className="btn btn-custom-primary" onClick={this.submitForm}>
                       <i className="fa fa-floppy-o" /> Save Changes</a></p>
                 </div>
 
