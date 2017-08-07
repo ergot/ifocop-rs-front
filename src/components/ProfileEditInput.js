@@ -9,8 +9,9 @@ class ProfileEditInput extends React.Component {
   }
 
   handleChange(event) {
-    this.setState({ value: event.target.value });
-    this.props.updateStateParent(this.props.label.toLowerCase(), this.state.value);
+    this.setState({ value: event.target.value }, () => {
+        this.props.updateStateParent(this.props.label.toLowerCase(), this.state.value);
+    });
   }
 
   render() {
