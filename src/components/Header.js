@@ -36,8 +36,10 @@ class Header extends React.Component {
           <div id="navbar" className="navbar-collapse collapse">
             <ul className="nav navbar-nav navbar-right">
               {/* <li className="actives"><a href="profile.html">Profile</a></li> */}
-              <li className="actives"><Link to={'profile'}>Profile</Link></li>
               <li><Link to={'/home'}>Home</Link></li>
+              <li className="actives"><Link to={'profile'}>Profile</Link></li>
+              <li className="actives"><Link to={'profileEdit'}>Edit Profile</Link></li>
+
               <li className="dropdown">
                 <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                     Pages <span className="caret" />

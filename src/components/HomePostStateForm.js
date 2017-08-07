@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from './template/Header'
+import Header from './Header'
 import Footer from "./Footer";
 import HomeLeftLinks from './HomeLeftLinks'
 import HomeCenterPosts from './HomeCenterPosts'

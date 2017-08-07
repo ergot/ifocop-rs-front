@@ -12,11 +12,11 @@ class HomeLeftLinks extends React.Component {
                   <img src="img/Friends/guy-3.jpg" alt="" />
                 </a>
                 <h1>John Breakgrow</h1>
-                <p>@username</p>
+                {/*<p>@username</p>*/}
               </div>
 
               <ul className="nav nav-pills nav-stacked">
-                <li className="active"><a href="#"> <i className="fa fa-user" /> News feed</a></li>
+                {/*<li className="active"><a href="#"> <i className="fa fa-user" /> News feed</a></li>*/}
                 <li>
                   <a href="#">
                     <i className="fa fa-envelope" /> Messages
@@ -31,17 +31,18 @@ class HomeLeftLinks extends React.Component {
             </div>
           </div>
 
-          <div className="widget">
-            <div className="widget-body">
-              <ul className="nav nav-pills nav-stacked">
-                <li><a href="#"> <i className="fa fa-globe" /> Pages</a></li>
-                <li><a href="#"> <i className="fa fa-gamepad" /> Games</a></li>
-                <li><a href="#"> <i className="fa fa-puzzle-piece" /> Ads</a></li>
-                <li><a href="#"> <i className="fa fa-home" /> Markerplace</a></li>
-                <li><a href="#"> <i className="fa fa-users" /> Groups</a></li>
-              </ul>
-            </div>
-          </div>
+          {/*<div className="widget">*/}
+            {/*<div className="widget-body">*/}
+              {/*<ul className="nav nav-pills nav-stacked">*/}
+                {/*<li><a href="#"> <i className="fa fa-globe" /> Pages</a></li>*/}
+                {/*<li><a href="#"> <i className="fa fa-gamepad" /> Games</a></li>*/}
+                {/*<li><a href="#"> <i className="fa fa-puzzle-piece" /> Ads</a></li>*/}
+                {/*<li><a href="#"> <i className="fa fa-home" /> Markerplace</a></li>*/}
+                {/*<li><a href="#"> <i className="fa fa-users" /> Groups</a></li>*/}
+              {/*</ul>*/}
+            {/*</div>*/}
+          {/*</div>*/}
+
         </div>
       </div>
     );
