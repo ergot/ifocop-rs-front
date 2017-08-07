@@ -9,7 +9,7 @@ class ProfileFriends extends React.Component {
 
   render() {
     return (
-      <div role="tabpanel" className="tab-pane active" id="messages">
+      <div role="tabpanel" className="tab-pane" id="messages">
         <div className="row">
           <ProfileFriendsContact />
           <ProfileFriendsContact />
