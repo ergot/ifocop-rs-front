@@ -9,8 +9,32 @@ class ProfileEdit extends React.Component {
     super(props);
     this.submitForm = this.submitForm.bind(this);
     this.updateStateParent = this.updateStateParent.bind(this);
+    this.getDataUser = this.getDataUser.bind(this);
+    this.getDataUser();
   }
 
+
+  getDataUser() {
+    console.log('--- component did mount ---');
+    const APP = window.APP.reducer({ type: 'GETSTATE' });
+    request
+      .get(`${APP.server.url}/myUsers/${APP.token.userId}`)
+      .set('Authorization', APP.token.id)
+      .end((err, res) => {
+        if (res.statusCode === 200) {
+          console.log('--- get data user ---');
+          this.inputName.handleChange({ target: { value: res.body.name } });
+          this.inputFirstName.handleChange({ target: { value: res.body.firstName } });
+          this.inputPseudo.handleChange({ target: { value: res.body.pseudo } });
+          this.inputCoordinates.handleChange({ target: { value: res.body.coordinates } });
+          this.inputAge.handleChange({ target: { value: res.body.age } });
+          this.inputPresentation.handleChange({ target: { value: res.body.presentation } });
+          this.inputPicture.handleChange({ target: { value: res.body.picture } });
+        } else {
+          console.log('--- get data user FAIL ---');
+        }
+      });
+  }
 
   submitForm() {
     console.log('--- submit profile edit ---');
@@ -47,14 +71,14 @@ class ProfileEdit extends React.Component {
               <div className="row">
                 <div className="col-md-10 col-md-offset-1">
                   <form className="form-horizontal">
-                    <ProfileEditInput label="Nom" updateStateParent={this.updateStateParent} id="name" />
-                    <ProfileEditInput label="Prénom" updateStateParent={this.updateStateParent} id="firstName" />
-                    <ProfileEditInput label="Pseudo" updateStateParent={this.updateStateParent} id="pseudo" />
+                    <ProfileEditInput label="Nom" updateStateParent={this.updateStateParent} id="name" ref={(input) => { this.inputName = input; }} />
+                    <ProfileEditInput label="Prénom" updateStateParent={this.updateStateParent} id="firstName" ref={(input) => { this.inputFirstName = input; }} />
+                    <ProfileEditInput label="Pseudo" updateStateParent={this.updateStateParent} id="pseudo" ref={(input) => { this.inputPseudo = input; }} />
                     {/* <ProfileEditInput label="Mail" updateStateParent={this.updateStateParent} id="email"/> */}
-                    <ProfileEditInput label="Coordonnées" updateStateParent={this.updateStateParent} id="coordinates" />
-                    <ProfileEditInput label="Age" updateStateParent={this.updateStateParent} id="age" />
-                    <ProfileEditInput label="Présentation" updateStateParent={this.updateStateParent} id="presentation" />
-                    <ProfileEditInput label="Photo" updateStateParent={this.updateStateParent} id="picture" />
+                    <ProfileEditInput label="Coordonnées" updateStateParent={this.updateStateParent} id="coordinates" ref={(input) => { this.inputCoordinates = input; }} />
+                    <ProfileEditInput label="Age" updateStateParent={this.updateStateParent} id="age" ref={(input) => { this.inputAge = input; }} />
+                    <ProfileEditInput label="Présentation" updateStateParent={this.updateStateParent} id="presentation" ref={(input) => { this.inputPresentation = input; }} />
+                    <ProfileEditInput label="Photo" updateStateParent={this.updateStateParent} id="picture" ref={(input) => { this.inputPicture = input; }} />
                   </form>
                   <p className="text-center">
                     <a href="#" className="btn btn-custom-primary" onClick={this.submitForm}>
@@ -68,7 +92,6 @@ class ProfileEdit extends React.Component {
         </div>
         <Footer />
       </div>
-
     );
   }
 }
