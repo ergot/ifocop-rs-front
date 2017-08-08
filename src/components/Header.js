@@ -23,15 +23,15 @@ class Header extends React.Component {
             <Link className="navbar-brand" to={'/home'}><b>Ifocop Rs</b></Link>
           </div>
 
-          <div className="navbar-header">
-            {/* <a className="navbar-brand" href="index.html"><b>Ifocop Rs</b></a> */}
-            <div className="navbar-brand">
-              <span className="input-icon">
-                <input type="text" className="form-control input-sm" />
-                <i className="glyphicon glyphicon-search blue" />
-              </span>
-            </div>
-          </div>
+          {/*<div className="navbar-header">*/}
+            {/*/!* <a className="navbar-brand" href="index.html"><b>Ifocop Rs</b></a> *!/*/}
+            {/*<div className="navbar-brand">*/}
+              {/*<span className="input-icon">*/}
+                {/*<input type="text" className="form-control input-sm" />*/}
+                {/*<i className="glyphicon glyphicon-search blue" />*/}
+              {/*</span>*/}
+            {/*</div>*/}
+          {/*</div>*/}
 
           <div id="navbar" className="navbar-collapse collapse">
             <ul className="nav navbar-nav navbar-right">
@@ -39,7 +39,7 @@ class Header extends React.Component {
               <li><Link to={'/home'}>Home</Link></li>
               <li className="actives"><Link to={'profile'}>Profile</Link></li>
               <li className="actives"><Link to={'profileEdit'}>Edit Profile</Link></li>
-
+              <li className="actives"><Link to={'searchFriend'}>Search Friend</Link></li>
               <li className="dropdown">
                 <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                     Pages <span className="caret" />
