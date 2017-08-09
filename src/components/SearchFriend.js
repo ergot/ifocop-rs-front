@@ -10,6 +10,7 @@ class SearchFriend extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.state = { value: '', results: [] };
   }
+
   handleSubmit(event) {
     event.preventDefault();
 

@@ -17,20 +17,13 @@ class ProfileFriends extends React.Component {
       });
     }
 
-
     return (
       <div role="tabpanel" className="tab-pane" id="messages">
         <div className="row">
 
-
           {renderFriendContact}
           {/* <ProfileFriendsContact /> */}
-          {/* <ProfileFriendsContact /> */}
-          {/* <ProfileFriendsContact /> */}
-          {/* <ProfileFriendsContact /> */}
-          {/* <ProfileFriendsContact /> */}
-          {/* <ProfileFriendsContact /> */}
-          {/* <ProfileFriendsContact /> */}
+
         </div>
       </div>
     );
