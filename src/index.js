@@ -8,6 +8,7 @@ import { Route, Link, BrowserRouter, Switch } from 'react-router-dom';
 import Profile from './components/Profile';
 import ProfileEdit from './components/ProfileEdit';
 import SearchFriend from './components/SearchFriend';
+import FriendRequest from './components/FriendRequest'
 
 
 // ReactDOM.render(<App />, document.getElementById('root'));
@@ -19,7 +20,8 @@ ReactDOM.render((
       <Route path="/home" component={Home} />
       <Route path="/profile" component={Profile} />
       <Route path="/profileEdit" component={ProfileEdit} />
-        <Route path="/searchFriend" component={SearchFriend} />
+      <Route path="/searchFriend" component={SearchFriend} />
+      <Route path="/friendRequest" component={FriendRequest} />
     </Switch>
   </BrowserRouter>
 ), document.getElementById('root'));
