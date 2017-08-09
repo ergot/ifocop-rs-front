@@ -9,7 +9,7 @@ class ProfileFriends extends React.Component {
 
   render() {
     let renderFriendContact = [];
-    if (this.props.friends.length === 0) {
+    if (this.props.friends === undefined || this.props.friends.length === 0) {
       //renderFriendContact.push(<p>pas de friend</p>);
     } else {
       this.props.friends.forEach((friend, index) => {

@@ -2,13 +2,34 @@ import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import FriendRequestTableTr from './FriendRequestTableTr';
+import request from 'superagent';
+import App from '../App';
 
 class FriendRequest extends React.Component {
   constructor(props) {
     super(props);
+    this.getFriendship = this.getFriendship.bind(this);
+  }
+
+  getFriendship() {
+    const APP = window.APP.reducer({ type: 'GETSTATE' });
+
+    request
+      .get(`${APP.server.url}/friendsLists/getFriendship`)
+      .set('Authorization', APP.token.id)
+      .query({ idUser: APP.token.userId })
+      .end((err, res) => {
+        console.log(res.body);
+        if (res.statusCode === 200) {
+          console.log('--- get friend request  ---');
+        } else {
+          console.log('--- get friend request error ---');
+        }
+      });
   }
 
   render() {
+    this.getFriendship();
     return (
       <div>
         <Header />
