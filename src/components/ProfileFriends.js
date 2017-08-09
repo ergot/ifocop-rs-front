@@ -8,16 +8,29 @@ class ProfileFriends extends React.Component {
   }
 
   render() {
+    let renderFriendContact = [];
+    if (this.props.friends.length === 0) {
+      //renderFriendContact.push(<p>pas de friend</p>);
+    } else {
+      this.props.friends.forEach((friend, index) => {
+        renderFriendContact.push(<ProfileFriendsContact key={friend.id} user={friend} />);
+      });
+    }
+
+
     return (
       <div role="tabpanel" className="tab-pane" id="messages">
         <div className="row">
-          <ProfileFriendsContact />
-          <ProfileFriendsContact />
-          <ProfileFriendsContact />
-          <ProfileFriendsContact />
-          <ProfileFriendsContact />
-          <ProfileFriendsContact />
-          <ProfileFriendsContact />
+
+
+          {renderFriendContact}
+          {/* <ProfileFriendsContact /> */}
+          {/* <ProfileFriendsContact /> */}
+          {/* <ProfileFriendsContact /> */}
+          {/* <ProfileFriendsContact /> */}
+          {/* <ProfileFriendsContact /> */}
+          {/* <ProfileFriendsContact /> */}
+          {/* <ProfileFriendsContact /> */}
         </div>
       </div>
     );

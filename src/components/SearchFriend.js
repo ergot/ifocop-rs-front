@@ -8,7 +8,7 @@ class SearchFriend extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.state = { value: '', result: [] };
+    this.state = { value: '', results: [] };
   }
   handleSubmit(event) {
     event.preventDefault();
@@ -21,8 +21,6 @@ class SearchFriend extends React.Component {
       .end((err, res) => {
         if (res.statusCode === 200) {
           console.log('--- submit search friend  ---');
-          console.log(res.body);
-          console.log(this.state.value);
           const results = [];
 
           res.body.map((user) => {
@@ -33,9 +31,9 @@ class SearchFriend extends React.Component {
             }
           });
 
-          this.setState({ result: results });
+          this.setState({ results });
         } else {
-          console.log('--- submit search friend  ---');
+          console.log('--- submit search friend ERROR ---');
         }
       });
   }
@@ -58,7 +56,7 @@ class SearchFriend extends React.Component {
           <p />
 
           <div className="row">
-            <ProfileFriends />
+            <ProfileFriends friends={this.state.results}  />
           </div>
 
         </div>

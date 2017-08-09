@@ -4,6 +4,7 @@ import React from 'react';
 class ProfileFriendsContact extends React.Component {
   constructor(props) {
     super(props);
+    this.state = props.user
   }
 
   render() {
@@ -12,7 +13,7 @@ class ProfileFriendsContact extends React.Component {
         <div className="contact-box center-version">
           <a href="#">
             <img alt="image" className="img-circle" src="img/Friends/woman-1.jpg" />
-            <h3 className="m-b-xs"><strong>John Doe</strong></h3>
+            <h4 className="m-b-xs"><strong>{this.state.firstName} {this.state.lastName}</strong></h4>
 
             <div className="font-bold">Graphics designer</div>
           </a>
