@@ -1,11 +1,13 @@
 import React from 'react';
 import request from 'superagent';
+import NotificationSystem from 'react-notification-system';
 
 class ProfileFriendsContact extends React.Component {
   constructor(props) {
     super(props);
     this.state = props.user;
     this.sendFriendRequest = this.sendFriendRequest.bind(this);
+    this._notificationSystem = null;
   }
 
   sendFriendRequest(event) {
@@ -17,11 +19,19 @@ class ProfileFriendsContact extends React.Component {
       .set('Authorization', APP.token.id)
       .send({ receiver: this.state.id, sender: APP.token.userId })
       .end((err, res) => {
-          if (res.statusCode === 200) {
-              console.log('--- friend request ok')
-          } else  {
-              console.log('--- friend request error')
-          }
+        if (res.statusCode === 200) {
+          console.log('--- friend request ok');
+          this._notificationSystem.addNotification({
+            message: 'La friend request est envoyé',
+            level: 'success',
+          });
+        } else {
+          console.log('--- friend request error');
+          this._notificationSystem.addNotification({
+            message: 'Un problème dans la friend request',
+            level: 'error', position: 'br'
+          });
+        }
       });
   }
 
@@ -39,7 +49,8 @@ class ProfileFriendsContact extends React.Component {
             <div className="m-t-xs btn-group">
               <a className="btn btn-xs btn-white" onClick={this.sendFriendRequest} ><i className="fa fa-user-plus" />Frend Request</a>
               <a href="messages1.html" className="btn btn-xs btn-white"><i className="fa fa-envelope" />Send Messages</a>
-
+              {/* <NotificationSystem ref="notificationSystem" /> */}
+              <NotificationSystem ref={(notif) => { this._notificationSystem = notif; }} />
             </div>
           </div>
         </div>
