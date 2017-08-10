@@ -58,7 +58,7 @@ class FriendRequest extends React.Component {
                     <thead>
                       <tr>
                         <th><span>User</span></th>
-                        <th><span>Created</span></th>
+                        <th><span>Origin de la request</span></th>
                         <th className="text-center"><span>Status</span></th>
                         <th><span>Email</span></th>
                         <th>&nbsp;</th>
