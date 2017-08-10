@@ -3,12 +3,14 @@ import Header from './Header';
 import Footer from './Footer';
 import FriendRequestTableTr from './FriendRequestTableTr';
 import request from 'superagent';
-import App from '../App';
+
 
 class FriendRequest extends React.Component {
   constructor(props) {
     super(props);
     this.getFriendship = this.getFriendship.bind(this);
+    this.state = { friendship: [] };
+    this.getFriendship();
   }
 
   getFriendship() {
@@ -22,6 +24,7 @@ class FriendRequest extends React.Component {
         console.log(res.body);
         if (res.statusCode === 200) {
           console.log('--- get friend request  ---');
+          this.setState({ friendship: res.body.friendship });
         } else {
           console.log('--- get friend request error ---');
         }
@@ -29,7 +32,16 @@ class FriendRequest extends React.Component {
   }
 
   render() {
-    this.getFriendship();
+    const renderFriendRequest = [];
+
+    if (this.state.friendship === undefined || this.state.friendship.length === 0) {
+      console.log('friend request pas de FR / chargement des td')
+    } else {
+      this.state.friendship.forEach((element) => {
+        renderFriendRequest.push(<FriendRequestTableTr key={element._id} value={element} />);
+      });
+    }
+
     return (
       <div>
         <Header />
@@ -53,10 +65,7 @@ class FriendRequest extends React.Component {
                       </tr>
                     </thead>
                     <tbody>
-                      <FriendRequestTableTr />
-                      <FriendRequestTableTr />
-                      <FriendRequestTableTr />
-                      <FriendRequestTableTr />
+                      {renderFriendRequest}
                     </tbody>
 
 
