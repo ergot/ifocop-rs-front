@@ -30,7 +30,7 @@ class FriendRequest extends React.Component {
     request
       .get(`${APP.server.url}/friendsLists/getFriendship`)
       .set('Authorization', APP.token.id)
-      .query({ idUser: APP.token.userId })
+      .query({ idUser: APP.token.userId, isConfirmed:false})
       .end((err, res) => {
         console.log(res.body);
         if (res.statusCode === 200) {

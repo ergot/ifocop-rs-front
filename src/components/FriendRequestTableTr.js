@@ -8,6 +8,7 @@ class FriendRequestTableTr extends React.Component {
     super(props);
     this.getUserRender = this.getUserRender.bind(this);
     this.deleteFr = this.deleteFr.bind(this);
+    this.valideFr = this.valideFr.bind(this);
     this._notificationSystem = null;
 
     this.state = {
@@ -53,22 +54,30 @@ class FriendRequestTableTr extends React.Component {
       });
   }
 
-  deleteFr() {
-    console.log('delete eeee');
-
+  valideFr() {
     const APP = window.APP.reducer({ type: 'GETSTATE' });
-    // let $this = this
-    // console.log(this.props.history)
-    // $this.props.history.push('/home');
-    // $this.props.history.push('/friendRequest');
+    request
+      .patch(`${APP.server.url}/friendsLists/${this.state.value._id}`)
+      .set('Authorization', APP.token.id)
+      .send({ isConfirmed: true })
+      .end((err, res) => {
+        if (res.statusCode === 200) {
+          console.log('--- fr request validé ---');
+          this.props.deleteFriendShip(this.state.value._id);
+        } else {
+          console.log('--- fr request validé error ---');
+        }
+      });
+  }
+
+  deleteFr() {
+    const APP = window.APP.reducer({ type: 'GETSTATE' });
     request
       .delete(`${APP.server.url}/friendsLists/${this.state.value._id}`)
       .set('Authorization', APP.token.id)
       .end((err, res) => {
-        console.log(res.body);
         if (res.statusCode === 200) {
           console.log('--- delete friend request table tr ---');
-
 
           this.props.deleteFriendShip(this.state.value._id);
         } else {
@@ -106,10 +115,10 @@ class FriendRequestTableTr extends React.Component {
           <a href="#">{this.state.userRender.email}</a>
         </td>
         <td style={{ width: '20%' }}>
-          <a href="#" className="table-link success">
+          <a href="#" className="table-link success" onClick={this.valideFr}>
             <span className="fa-stack">
               <i className="fa fa-square fa-stack-2x" />
-              <i className="fa fa-search-plus fa-stack-1x fa-inverse" />
+              <i className="fa fa-check fa-stack-1x fa-inverse" />
             </span>
           </a>
           <a href="#" className="table-link">
