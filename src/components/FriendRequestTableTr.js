@@ -1,15 +1,19 @@
 import React from 'react';
 import request from 'superagent';
+import NotificationSystem from 'react-notification-system';
 
 
 class FriendRequestTableTr extends React.Component {
   constructor(props) {
     super(props);
     this.getUserRender = this.getUserRender.bind(this);
+    this.deleteFr = this.deleteFr.bind(this);
+    this._notificationSystem = null;
+
     this.state = {
       value: this.props.value,
       userRender: '',
-        originRender: ''
+      originRender: '',
     };
 
     if (this.state.userRender === '') {
@@ -22,16 +26,16 @@ class FriendRequestTableTr extends React.Component {
     const APP = window.APP.reducer({ type: 'GETSTATE' });
     let id = null;
 
-    //le connecté fait une demande
-    if(APP.token.userId === this.state.value.sender) {
-        id = this.state.value.receiver
-        this.state.originRender = 'moi'
+    // le connecté fait une demande
+    if (APP.token.userId === this.state.value.sender) {
+      id = this.state.value.receiver;
+      this.state.originRender = 'moi';
     }
 
-    //le connecte recoit une demande
-    if(APP.token.userId === this.state.value.receiver) {
-      id = this.state.value.sender
-        this.state.originRender = 'lui'
+    // le connecte recoit une demande
+    if (APP.token.userId === this.state.value.receiver) {
+      id = this.state.value.sender;
+      this.state.originRender = 'lui';
     }
 
 
@@ -49,9 +53,34 @@ class FriendRequestTableTr extends React.Component {
       });
   }
 
+  deleteFr() {
+    console.log('delete eeee');
+
+    const APP = window.APP.reducer({ type: 'GETSTATE' });
+    // let $this = this
+    // console.log(this.props.history)
+    // $this.props.history.push('/home');
+    // $this.props.history.push('/friendRequest');
+    request
+      .delete(`${APP.server.url}/friendsLists/${this.state.value._id}`)
+      .set('Authorization', APP.token.id)
+      .end((err, res) => {
+        console.log(res.body);
+        if (res.statusCode === 200) {
+          console.log('--- delete friend request table tr ---');
+
+
+          this.props.deleteFriendShip(this.state.value._id);
+        } else {
+          console.log('--- delete friend request table tr error ---');
+          this._notificationSystem.addNotification({
+            message: 'erreur dans le suppression de la friend request',
+            level: 'warning',
+          });
+        }
+      });
+  }
   render() {
-
-
     // definition du status
     let renderStatus = null;
     if (this.state.value.isConfirmed === false) {
@@ -68,7 +97,7 @@ class FriendRequestTableTr extends React.Component {
           <span className="user-subhead">Member</span>
         </td>
         <td>
-            {this.state.originRender}
+          {this.state.originRender}
         </td>
         <td className="text-center">
           {renderStatus}
@@ -89,10 +118,11 @@ class FriendRequestTableTr extends React.Component {
               <i className="fa fa-pencil fa-stack-1x fa-inverse" />
             </span>
           </a>
-          <a href="#" className="table-link danger">
+          <a href="#" className="table-link danger" onClick={this.deleteFr}>
             <span className="fa-stack">
               <i className="fa fa-square fa-stack-2x" />
               <i className="fa fa-trash-o fa-stack-1x fa-inverse" />
+              <NotificationSystem ref={(notif) => { this._notificationSystem = notif; }} />
             </span>
           </a>
         </td>

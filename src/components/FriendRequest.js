@@ -9,8 +9,19 @@ class FriendRequest extends React.Component {
   constructor(props) {
     super(props);
     this.getFriendship = this.getFriendship.bind(this);
+    this.deleteFriendShip = this.deleteFriendShip.bind(this);
     this.state = { friendship: [] };
     this.getFriendship();
+  }
+
+  deleteFriendShip(id) {
+    const newState = [];
+    this.state.friendship.map((element) => {
+      if (element._id !== id) {
+        newState.push(element);
+      }
+    });
+    this.setState({ friendship: newState });
   }
 
   getFriendship() {
@@ -35,10 +46,10 @@ class FriendRequest extends React.Component {
     const renderFriendRequest = [];
 
     if (this.state.friendship === undefined || this.state.friendship.length === 0) {
-      console.log('friend request pas de FR / chargement des td')
+      console.log('friend request pas de FR / chargement des td');
     } else {
       this.state.friendship.forEach((element) => {
-        renderFriendRequest.push(<FriendRequestTableTr key={element._id} value={element} />);
+        renderFriendRequest.push(<FriendRequestTableTr key={element._id} value={element} deleteFriendShip={this.deleteFriendShip} />);
       });
     }
 
