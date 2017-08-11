@@ -18,47 +18,47 @@ class ProfileTimeLineWidgetFriends extends React.Component {
               <ul className="img-grid" style={{ margin: '0 auto' }}>
                 <li>
                   <a href="#">
-                    <img src="img/Friends/guy-6.jpg" alt="image" />
+                    <img src="/img/Friends/guy-6.jpg" alt="image" />
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    <img src="img/Friends/woman-3.jpg" alt="image" />
+                    <img src="/img/Friends/woman-3.jpg" alt="image" />
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    <img src="img/Friends/guy-2.jpg" alt="image" />
+                    <img src="/img/Friends/guy-2.jpg" alt="image" />
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    <img src="img/Friends/guy-9.jpg" alt="image" />
+                    <img src="/img/Friends/guy-9.jpg" alt="image" />
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    <img src="img/Friends/woman-9.jpg" alt="image" />
+                    <img src="/img/Friends/woman-9.jpg" alt="image" />
                   </a>
                 </li>
                 <li className="clearfix">
                   <a href="#">
-                    <img src="img/Friends/guy-4.jpg" alt="image" />
+                    <img src="/img/Friends/guy-4.jpg" alt="image" />
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    <img src="img/Friends/guy-1.jpg" alt="image" />
+                    <img src="/img/Friends/guy-1.jpg" alt="image" />
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    <img src="img/Friends/woman-4.jpg" alt="image" />
+                    <img src="/img/Friends/woman-4.jpg" alt="image" />
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    <img src="img/Friends/guy-6.jpg" alt="image" />
+                    <img src="/img/Friends/guy-6.jpg" alt="image" />
                   </a>
                 </li>
               </ul>

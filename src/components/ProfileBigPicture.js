@@ -8,13 +8,13 @@ class ProfileBigPicture extends React.Component {
 
   render() {
     return (
-      <div className="bg-picture" style={{ backgroundImage: "url('img/Cover/cover.jpg')" }}>
+      <div className="bg-picture" style={{ backgroundImage: "url('/img/Cover/cover.jpg')" }}>
         <span className="bg-picture-overlay" /> {/* <!-- overlay --> */}
         {/* <!-- meta --> */}
         <div className="box-layout meta bottom">
           <div className="col-md-6 clearfix">
             <span className="img-wrapper pull-left m-r-15">
-              <img src="img/Friends/guy-3.jpg" alt="" style={{ width: '64px' }} className="br-radius" />
+              <img src="/img/Friends/guy-3.jpg" alt="" style={{ width: '64px' }} className="br-radius" />
             </span>
             <div className="media-body">
               <h3 className="text-white mb-2 m-t-10 ellipsis">John Breakgrow jr.</h3>
