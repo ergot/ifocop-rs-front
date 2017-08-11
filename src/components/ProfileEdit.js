@@ -23,7 +23,7 @@ class ProfileEdit extends React.Component {
       .end((err, res) => {
         if (res.statusCode === 200) {
           console.log('--- get data user ---');
-          this.inputName.handleChange({ target: { value: res.body.name } });
+          this.inputLastName.handleChange({ target: { value: res.body.lastName } });
           this.inputFirstName.handleChange({ target: { value: res.body.firstName } });
           this.inputPseudo.handleChange({ target: { value: res.body.pseudo } });
           this.inputCoordinates.handleChange({ target: { value: res.body.coordinates } });
@@ -71,7 +71,7 @@ class ProfileEdit extends React.Component {
               <div className="row">
                 <div className="col-md-10 col-md-offset-1">
                   <form className="form-horizontal">
-                    <ProfileEditInput label="Nom" updateStateParent={this.updateStateParent} id="name" ref={(input) => { this.inputName = input; }} />
+                    <ProfileEditInput label="Nom" updateStateParent={this.updateStateParent} id="lastName" ref={(input) => { this.inputLastName = input; }} />
                     <ProfileEditInput label="Prénom" updateStateParent={this.updateStateParent} id="firstName" ref={(input) => { this.inputFirstName = input; }} />
                     <ProfileEditInput label="Pseudo" updateStateParent={this.updateStateParent} id="pseudo" ref={(input) => { this.inputPseudo = input; }} />
                     {/* <ProfileEditInput label="Mail" updateStateParent={this.updateStateParent} id="email"/> */}
