@@ -9,6 +9,7 @@ import Profile from './components/Profile';
 import ProfileEdit from './components/ProfileEdit';
 import SearchFriend from './components/SearchFriend';
 import FriendRequest from './components/FriendRequest'
+import Friends from './components/Friends'
 
 
 // ReactDOM.render(<App />, document.getElementById('root'));
@@ -22,6 +23,7 @@ ReactDOM.render((
       <Route path="/profileEdit" component={ProfileEdit} />
       <Route path="/searchFriend" component={SearchFriend} />
       <Route path="/friendRequest" component={FriendRequest} />
+      <Route path="/friends" component={Friends} />
     </Switch>
   </BrowserRouter>
 ), document.getElementById('root'));

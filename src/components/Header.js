@@ -41,6 +41,7 @@ class Header extends React.Component {
               <li className="actives"><Link to={'profileEdit'}>Edit Profile</Link></li>
               <li className="actives"><Link to={'searchFriend'}>Search Friend</Link></li>
               <li className="actives"><Link to={'friendRequest'}>Friend Request</Link></li>
+              <li className="actives"><Link to={'friends'}>Friends</Link></li>
               <li className="dropdown">
                 <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                     Pages <span className="caret" />
