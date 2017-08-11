@@ -1,6 +1,11 @@
 import React from 'react';
 import request from 'superagent';
 import NotificationSystem from 'react-notification-system';
+import {
+    BrowserRouter as Router,
+    Route,
+    Link
+} from 'react-router-dom'
 
 class ProfileFriendsContact extends React.Component {
   constructor(props) {
@@ -29,7 +34,8 @@ class ProfileFriendsContact extends React.Component {
           console.log('--- friend request error');
           this._notificationSystem.addNotification({
             message: 'Un problème dans la friend request',
-            level: 'error', position: 'br'
+            level: 'error',
+            position: 'br',
           });
         }
       });
@@ -39,12 +45,17 @@ class ProfileFriendsContact extends React.Component {
     return (
       <div className="col-md-3">
         <div className="contact-box center-version">
-          <a href="#">
-            <img alt="image" className="img-circle" src="img/Friends/woman-1.jpg" />
+          {/*<Link to='/profile' params={{idUser: this.state.id}}>*/}
+          <Link to={{ pathname: `/profile/${this.state.id}` }} >
+            <img alt="image" className="img-circle" src="/img/Friends/woman-1.jpg" />
             <h5 className="m-b-xs"><strong>{this.state.firstName} {this.state.lastName}</strong></h5>
+          </Link>
+          {/*<a href="#">*/}
+            {/*<img alt="image" className="img-circle" src="/img/Friends/woman-1.jpg" />*/}
+            {/*<h5 className="m-b-xs"><strong>{this.state.firstName} {this.state.lastName}</strong></h5>*/}
 
-            {/* <div className="font-bold">Graphics designer</div> */}
-          </a>
+            {/*/!* <div className="font-bold">Graphics designer</div> *!/*/}
+          {/*</a>*/}
           <div className="contact-box-footer">
             <div className="m-t-xs btn-group">
               <a className="btn btn-xs btn-white" onClick={this.sendFriendRequest} ><i className="fa fa-user-plus" />Frend Request</a>
