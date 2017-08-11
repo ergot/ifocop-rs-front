@@ -10,7 +10,6 @@ class FriendsInputSearch extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log(event.target.value)
       this.props.findFriends(this.state.value)
   }
 

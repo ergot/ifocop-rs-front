@@ -49,29 +49,27 @@ class Friends extends React.Component {
   }
 
   findFriends(value) {
+    console.log(value);
+
     if (value === '') {
+      this.setState({ friends: [] });
       this.getAllFriends();
+    } else {
+      const results = [];
+      this.state.friends.map((user) => {
+        const regex = new RegExp(value, 'g');
+
+        if (user.lastName.search(regex) > -1) {
+          return results.push(user);
+        }
+
+        if (user.firstName.search(regex) > -1) {
+          return results.push(user);
+        }
+      });
+
+      this.setState({ friends: results });
     }
-    const results = [];
-    this.state.friends.map((user) => {
-      const regex = new RegExp(this.state.value, 'g');
-
-      if (user.name.search(regex) > -1) {
-        return results.push(user);
-      }
-
-      if (user.firstName.search(regex) > -1) {
-        return results.push(user);
-      }
-    });
-    res.body.map((user) => {
-      const regex = new RegExp(this.state.value, 'g');
-
-      if (user.email.search(regex) > -1) {
-        return results.push(user);
-      }
-    });
-    this.setState({ friends: results });
   }
 
   render() {
@@ -80,11 +78,11 @@ class Friends extends React.Component {
         <Header />
         <div className="container page-content">
           <div className="row">
-            <FriendsInputSearch />
+            <FriendsInputSearch findFriends={this.findFriends} />
           </div>
           <p />
           <div className="row">
-            <ProfileFriends friends={this.state.friends} findFriends={this.findFriends} />
+            <ProfileFriends friends={this.state.friends} />
           </div>
 
         </div>
