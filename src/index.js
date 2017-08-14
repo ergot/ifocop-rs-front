@@ -13,6 +13,9 @@ import Friends from './components/Friends';
 
 
 // ReactDOM.render(<App />, document.getElementById('root'));
+sessionStorage.setItem('pathApi', 'http://localhost:3000/api');
+sessionStorage.setItem('token', null);
+
 
 ReactDOM.render((
   <BrowserRouter>
