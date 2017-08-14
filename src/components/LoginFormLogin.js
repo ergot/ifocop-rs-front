@@ -27,6 +27,7 @@ class LoginFormLogin extends React.Component {
           console.log('--- log in valide ---');
           console.log(res.body);
           APP.setState({ token: res.body });
+          sessionStorage.userId = res.body.userId
           $this.moveToHome();
         } else {
           console.log('--- log in non valide ---');
