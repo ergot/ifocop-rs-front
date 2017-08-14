@@ -18,7 +18,7 @@ class Home extends React.Component {
                     {/*<!-- left links -->*/}
                     <HomeLeftLinks/>
                     {/*<!-- center posts -->*/}
-                    <HomeCenterPosts/>
+                    <HomeCenterPosts colmd="9"/>
                 </div>
 
             </div>

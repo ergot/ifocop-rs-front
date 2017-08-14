@@ -5,14 +5,29 @@ import ProfileBigPicture from './ProfileBigPicture';
 import ProfileNavTab from './ProfileNavTab';
 import ProfileTimeLine from './ProfileTimeLine';
 import ProfileAbout from './ProfileAbout';
-import ProfileFriends from './ProfileFriends'
+import ProfileFriends from './ProfileFriends';
 
 class Profile extends React.Component {
   constructor(props) {
     super(props);
+    this.getIdUser = this.getIdUser.bind(this);
   }
 
+  getIdUser(props) {
+    let idUser = null;
+    if (props.match.params.idUser === undefined) {
+      idUser = window.sessionStorage.userId;
+    } else {
+      idUser = props.match.params.idUser;
+    }
+
+    return idUser;
+  }
+
+
   render() {
+    const idUser = this.getIdUser(this.props);
+    console.log(idUser);
     return (
       <div>
         <Header />
@@ -22,7 +37,7 @@ class Profile extends React.Component {
               {/* profile big picture */}
               <div className="row">
                 <div className="col-md-12">
-                  <ProfileBigPicture />
+                  <ProfileBigPicture idUser={idUser} />
                 </div>
               </div>
               {/* page content */}
@@ -35,8 +50,8 @@ class Profile extends React.Component {
                   <ProfileTimeLine />
                   {/* about */}
                   <ProfileAbout />
-                    {/* friends*/}
-                    <ProfileFriends />
+                  {/* friends */}
+                  <ProfileFriends />
                 </div>
               </div>
             </div>

@@ -9,9 +9,8 @@ class ProfileTimeLinePosts extends React.Component {
   render() {
     return (
         <div className="row">
-        <HomeCenterPostes/>
+        <HomeCenterPostes colmd="12"/>
         </div>
-
     );
   }
 }

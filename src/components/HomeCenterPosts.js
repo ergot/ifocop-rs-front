@@ -7,9 +7,15 @@ class HomeCenterPosts extends React.Component {
     super(props);
   }
 
+
   render() {
+    const colmd = `col-md-${this.props.colmd}`;
+
     return (
-      <div className="col-md-6">
+    // ici pour profile page md-12
+    // ici pour la home md-9
+    // <div className="col-md-9">
+      <div className={colmd}>
         <div className="row">
           {/* <!-- left posts--> */}
           <div className="col-md-12">
