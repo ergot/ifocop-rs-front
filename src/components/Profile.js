@@ -29,6 +29,9 @@ class Profile extends React.Component {
     return idUser;
   }
 
+  componentWillUnmount() {
+    window.sessionStorage.setItem('wallIdUser', null);
+  }
 
   render() {
     return (
