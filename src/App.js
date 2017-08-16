@@ -24,7 +24,7 @@ class App extends Component {
     this.state = {
       token: undefined,
       server: {
-        url: 'http://localhost:3000/api',
+        url: process.env.REACT_APP_URL_API,
       },
 
     };

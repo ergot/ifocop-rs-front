@@ -19,7 +19,7 @@ class LoginFormSignUp extends React.Component {
     const $this = this;
 
     request
-      .post('http://localhost:3000/api/myUsers')
+      .post(`${process.env.REACT_APP_URL_API}/myUsers`)
       .send(this.state)
       .end((err, res) => {
         $this.setState({ name: '' });

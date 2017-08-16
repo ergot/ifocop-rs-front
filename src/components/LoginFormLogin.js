@@ -20,7 +20,7 @@ class LoginFormLogin extends React.Component {
   submit() {
     const $this = this;
     request
-      .post('http://localhost:3000/api/myUsers/login')
+      .post(`${process.env.REACT_APP_URL_API}/myUsers/login`)
       .send({ password: $this.password.value, email: $this.email.value })
       .end((err, res) => {
         if (res.statusCode === 200) {
@@ -46,7 +46,7 @@ class LoginFormLogin extends React.Component {
     } else {
       const $this = this;
       request
-        .post('http://localhost:3000/api/myUsers/reset')
+        .post(`${process.env.REACT_APP_URL_API}/myUsers/reset`)
         .send({ email: $this.email.value })
         .end((err, res) => {
           if (res.statusCode === 204) {

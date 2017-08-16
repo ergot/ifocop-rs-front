@@ -13,7 +13,7 @@ import Friends from './components/Friends';
 
 
 // ReactDOM.render(<App />, document.getElementById('root'));
-sessionStorage.setItem('pathApi', 'http://localhost:3000/api');
+sessionStorage.setItem('pathApi', process.env.REACT_APP_URL_API);
 sessionStorage.setItem('token', null);
 sessionStorage.setItem('userId', null);
 sessionStorage.setItem('wallIdUser', null);
