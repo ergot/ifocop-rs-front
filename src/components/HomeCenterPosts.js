@@ -22,7 +22,7 @@ class HomeCenterPosts extends React.Component {
             <div className="row">
               <div className="col-md-12">
                 {/* <!-- post state form --> */}
-                <HomePostStateForm />
+                <HomePostStateForm idUser={this.props.idUser} />
                 {/* <!--   posts --> */}
                 <HomePosts />
 
