@@ -6,6 +6,10 @@ import ProfileNavTab from './ProfileNavTab';
 import ProfileTimeLine from './ProfileTimeLine';
 import ProfileAbout from './ProfileAbout';
 import ProfileFriends from './ProfileFriends';
+import ProfileTimeLineWidget from './ProfileTimeLineWidget';
+import ProfileTimeLineWidgetFriends from './ProfileTimeLineWidgetFriends';
+import ProfileTimeLinePosts from './ProfileTimeLinePosts';
+import HomeCenterPosts from './HomeCenterPosts';
 
 class Profile extends React.Component {
   constructor(props) {
@@ -40,7 +44,25 @@ class Profile extends React.Component {
                 {/* Tab panes */}
                 <div className="tab-content">
                   {/* timeline */}
-                  <ProfileTimeLine idUser={idUser} />
+                  {/* <ProfileTimeLine idUser={idUser} /> */}
+                  <div className="tab-pane active" role="tabpanel" id="timeline">
+                    <div className="row">
+                      {/* colon left widget */}
+                      <div className="col-md-5">
+                        <ProfileTimeLineWidget />
+                        <ProfileTimeLineWidgetFriends />
+                      </div>
+                      {/* colon right post line */}
+                      <div className="col-md-7">
+                        {/* <ProfileTimeLinePosts /> */}
+                        <div className="row">
+                          <HomeCenterPosts colmd="12" idUser={idUser} />
+                        </div>
+                      </div>
+
+                    </div>
+
+                  </div>
                   {/* about */}
                   <ProfileAbout />
                   {/* friends */}
