@@ -27,6 +27,12 @@ class ProfileBigPicture extends React.Component {
       });
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState(nextProps, () => {
+      this.getUser();
+    });
+  }
+
   render() {
     const firstName = this.state.user ? this.state.user.firstName : 'firstName';
     const lastName = this.state.user ? this.state.user.lastName : 'lastName';
