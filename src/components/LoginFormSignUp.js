@@ -7,7 +7,7 @@ class LoginFormSignUp extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
-      name: '',
+      pseudo: '',
       email: '',
       password: '',
       messageForm: '',
@@ -22,12 +22,12 @@ class LoginFormSignUp extends React.Component {
       .post(`${process.env.REACT_APP_URL_API}/myUsers`)
       .send(this.state)
       .end((err, res) => {
-        $this.setState({ name: '' });
+        $this.setState({ pseudo: '' });
         if (res.statusCode === 200) {
           console.log('--- inscription valide ---');
           $this.setState({ messageForm: 'Consulter votre email pour valider le compte' });
           $this.messageForm.className = 'text-success';
-          $this.setState({ name: '' });
+          $this.setState({ pseudo: '' });
           console.log(res);
         } else {
           console.log('--- inscription non valide ---');
@@ -58,8 +58,8 @@ class LoginFormSignUp extends React.Component {
               <input
                 type="text"
                 className="form-control"
-                placeholder="Full Name"
-                onChange={event => this.setState({ name: event.target.value })}
+                placeholder="Pseudo"
+                onChange={event => this.setState({ pseudo: event.target.value })}
               />
             </div>
             <div className="form-group">
