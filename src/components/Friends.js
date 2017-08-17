@@ -15,11 +15,11 @@ class Friends extends React.Component {
   }
 
   getAllFriends() {
-    const APP = window.APP.reducer({ type: 'GETSTATE' });
+
     request
-      .get(`${APP.server.url}/friendsLists/getFriendship`)
-      .query({ idUser: APP.token.userId, isConfirmed: true })
-      .set('Authorization', APP.token.id)
+      .get(`${process.env.REACT_APP_URL_API}/friendsLists/getFriendship`)
+      .query({ idUser: sessionStorage.userId, isConfirmed: true })
+      .set('Authorization', sessionStorage.token)
       .end((err, res) => {
         console.log(res.body);
         if (res.statusCode === 200) {
@@ -29,10 +29,10 @@ class Friends extends React.Component {
 
           res.body.friendship.map((friendship) => {
             // eslint-disable-next-line max-len
-            friendship.sender === APP.token.userId ? idFriend = friendship.receiver : idFriend = friendship.sender;
+            friendship.sender === sessionStorage.userId ? idFriend = friendship.receiver : idFriend = friendship.sender;
             console.log(idFriend);
-            request.get(`${APP.server.url}/myUsers/${idFriend}`)
-              .set('Authorization', APP.token.id)
+            request.get(`${process.env.REACT_APP_URL_API}/myUsers/${idFriend}`)
+              .set('Authorization', sessionStorage.token)
               .end((err, res) => {
                 if (res.statusCode === 200) {
                   console.log('--- submit friends / user ---');
