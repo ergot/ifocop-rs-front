@@ -10,30 +10,17 @@ import ProfileFriends from './ProfileFriends';
 class Profile extends React.Component {
   constructor(props) {
     super(props);
-    this.getIdUser = this.getIdUser.bind(this);
-    this.state = {
-      idUser: this.getIdUser(props),
-    };
   }
 
-  getIdUser(props) {
-    let idUser = null;
-    if (props.match.params.idUser === undefined) {
-      idUser = window.sessionStorage.userId;
-      window.sessionStorage.setItem('wallIdUser', null);
-    } else {
-      idUser = props.match.params.idUser;
-      window.sessionStorage.setItem('wallIdUser', props.match.params.idUser);
-    }
-
-    return idUser;
-  }
-
-  componentWillUnmount() {
-    window.sessionStorage.setItem('wallIdUser', null);
-  }
 
   render() {
+    let idUser = null;
+    if (this.props.match.params.idUser === undefined) {
+      idUser = sessionStorage.userId;
+    } else {
+      idUser = this.props.match.params.idUser;
+    }
+
     return (
       <div>
         <Header />
@@ -43,7 +30,7 @@ class Profile extends React.Component {
               {/* profile big picture */}
               <div className="row">
                 <div className="col-md-12">
-                  <ProfileBigPicture idUser={this.state.idUser} />
+                  <ProfileBigPicture idUser={idUser} />
                 </div>
               </div>
               {/* page content */}
@@ -53,7 +40,7 @@ class Profile extends React.Component {
                 {/* Tab panes */}
                 <div className="tab-content">
                   {/* timeline */}
-                  <ProfileTimeLine />
+                  <ProfileTimeLine idUser={idUser} />
                   {/* about */}
                   <ProfileAbout />
                   {/* friends */}
