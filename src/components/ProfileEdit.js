@@ -13,13 +13,11 @@ class ProfileEdit extends React.Component {
     this.getDataUser();
   }
 
-
   getDataUser() {
     console.log('--- component did mount ---');
-    const APP = window.APP.reducer({ type: 'GETSTATE' });
     request
-      .get(`${APP.server.url}/myUsers/${APP.token.userId}`)
-      .set('Authorization', APP.token.id)
+      .get(`${process.env.REACT_APP_URL_API}/myUsers/${sessionStorage.userId}`)
+      .set('Authorization', sessionStorage.token)
       .end((err, res) => {
         if (res.statusCode === 200) {
           console.log('--- get data user ---');
@@ -38,11 +36,10 @@ class ProfileEdit extends React.Component {
 
   submitForm() {
     console.log('--- submit profile edit ---');
-    const APP = window.APP.reducer({ type: 'GETSTATE' });
 
     request
-      .patch(`${APP.server.url}/myUsers/${APP.token.userId}`)
-      .set('Authorization', APP.token.id)
+      .patch(`${process.env.REACT_APP_URL_API}/myUsers/${sessionStorage.userId}`)
+      .set('Authorization', sessionStorage.token)
       .send(this.state)
       .end((err, res) => {
         console.log(res.body);
