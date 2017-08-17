@@ -14,10 +14,11 @@ import Friends from './components/Friends';
 
 // ReactDOM.render(<App />, document.getElementById('root'));
 sessionStorage.setItem('pathApi', process.env.REACT_APP_URL_API);
-sessionStorage.setItem('token', null);
-sessionStorage.setItem('userId', null);
-sessionStorage.setItem('wallIdUser', null);
 
+if (sessionStorage.token === undefined) {
+  sessionStorage.setItem('token', null);
+  sessionStorage.setItem('userId', null);
+}
 
 ReactDOM.render((
   <BrowserRouter>
