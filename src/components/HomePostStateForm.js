@@ -6,25 +6,15 @@ class HomePostStateForm extends React.Component {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.setIdUser = this.setIdUser.bind(this);
     this.state = {
       value: 'Whats in your mind today?',
-      userId: null,
+      userId: this.props.idUser,
     };
   }
-
-  componentDidMount() {
-    this.setIdUser();
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps)
+      this.setState({userId:nextProps.idUser})
   }
-
-  setIdUser() {
-    if (sessionStorage.wallIdUser === 'null') {
-      this.setState({ userId: sessionStorage.userId });
-    } else {
-      this.setState({ userId: sessionStorage.wallIdUser });
-    }
-  }
-
   handleChange(event) {
     this.setState({ value: event.target.value });
   }
