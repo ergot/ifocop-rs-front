@@ -1,8 +1,8 @@
 import React from 'react';
-import Header from './Header'
-import Footer from "./Footer";
-import HomeLeftLinks from './HomeLeftLinks'
-import HomeCenterPosts from './HomeCenterPosts'
+import Header from './Header';
+import Footer from './Footer';
+import HomeLeftLinks from './HomeLeftLinks';
+import HomeCenterPosts from './HomeCenterPosts';
 
 class Home extends React.Component {
   constructor(props) {
@@ -11,19 +11,19 @@ class Home extends React.Component {
 
   render() {
     return (
-        <div>
-            <Header/>
-            <div className="container page-content">
-                <div className="row">
-                    {/*<!-- left links -->*/}
-                    <HomeLeftLinks/>
-                    {/*<!-- center posts -->*/}
-                    <HomeCenterPosts colmd="9"/>
-                </div>
+      <div>
+        <Header />
+        <div className="container page-content">
+          <div className="row">
+            {/* <!-- left links --> */}
+            <HomeLeftLinks />
+            {/* <!-- center posts --> */}
+            <HomeCenterPosts colmd={9} />
+          </div>
 
-            </div>
-            <Footer/>
         </div>
+        <Footer />
+      </div>
 
     );
   }
