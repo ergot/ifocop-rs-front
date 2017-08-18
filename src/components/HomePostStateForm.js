@@ -12,7 +12,6 @@ class HomePostStateForm extends React.Component {
     };
   }
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps)
       this.setState({userId:nextProps.idUser})
   }
   handleChange(event) {
