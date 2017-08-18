@@ -56,7 +56,7 @@ class Profile extends React.Component {
                       <div className="col-md-7">
                         {/* <ProfileTimeLinePosts /> */}
                         <div className="row">
-                          <HomeCenterPosts colmd="12" idUser={idUser} />
+                          <HomeCenterPosts colmd={12} idUser={idUser} path="profile" />
                         </div>
                       </div>
 
