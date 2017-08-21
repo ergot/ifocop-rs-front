@@ -8,6 +8,7 @@ class HomeCenterPosts extends React.Component {
   constructor(props) {
     super(props);
     this.getPosts = this.getPosts.bind(this);
+    this.refreshPosts = this.refreshPosts.bind(this);
     this.state = { posts: null };
     this.getPosts();
   }
@@ -35,6 +36,13 @@ class HomeCenterPosts extends React.Component {
     });
   }
 
+  refreshPosts() {
+    this.setState({ posts: null }, () => {
+      this.getPosts();
+    });
+  }
+
+
   render() {
     const colmd = `col-md-${this.props.colmd}`;
 
@@ -56,7 +64,7 @@ class HomeCenterPosts extends React.Component {
             <div className="row">
               <div className="col-md-12">
                 {/* <!-- post state form --> */}
-                <HomePostStateForm idUser={this.props.idUser} />
+                <HomePostStateForm idUser={this.props.idUser} refreshPosts={this.refreshPosts} />
                 {/* <!--   posts --> */}
                 {/* <HomePosts /> */}
 

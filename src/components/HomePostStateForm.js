@@ -12,7 +12,7 @@ class HomePostStateForm extends React.Component {
     };
   }
   componentWillReceiveProps(nextProps) {
-      this.setState({userId:nextProps.idUser})
+    this.setState({ userId: nextProps.idUser });
   }
   handleChange(event) {
     this.setState({ value: event.target.value });
@@ -26,6 +26,7 @@ class HomePostStateForm extends React.Component {
       .end((err, res) => {
         if (res.statusCode === 200) {
           console.log('--- post wall profile ---');
+          this.props.refreshPosts();
         } else {
           console.log('--- post wall profile FAIL ---');
         }

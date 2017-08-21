@@ -2,7 +2,6 @@ import React from 'react';
 import request from 'superagent';
 
 
-
 class HomePosts extends React.Component {
   constructor(props) {
     super(props);
@@ -43,8 +42,11 @@ class HomePosts extends React.Component {
         </div>
 
         <div className="box-body" style={{ display: 'block' }}>
-          <img className="img-responsive show-in-modal" src="/img/Post/young-couple-in-love.jpg" alt="Photo" />
-          <p>Messager: {this.state.message}</p>
+          {/* <img className="img-responsive show-in-modal" src="/img/Post/young-couple-in-love.jpg" alt="Photo" /> */}
+          <blockquote>
+            <p>{this.state.message}</p>
+          </blockquote>
+
           <button type="button" className="btn btn-default btn-xs"><i className="fa fa-share" /> Share</button>
           <button type="button" className="btn btn-default btn-xs"><i className="fa fa-thumbs-o-up" /> Like</button>
           <span className="pull-right text-muted">127 likes - 3 comments</span>
