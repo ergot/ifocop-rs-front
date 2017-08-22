@@ -25,7 +25,7 @@ class HomePostCommentInput extends React.Component {
     request
       .post(`${process.env.REACT_APP_URL_API}/myUsers/${this.props.userId}/walls`)
       .set('Authorization', sessionStorage.token)
-      .send({ message: this.state.message, dateCreated: new Date(), friendId: sessionStorage.userId, parentId: this.state.parentId })
+      .send({ message: this.state.message, dateCreated: new Date(), friendId: sessionStorage.userId, parentId: `pre${this.state.parentId}` })
       .end((err, res) => {
         if (res.statusCode === 200) {
           console.log('--- post wall profile comment ---');
