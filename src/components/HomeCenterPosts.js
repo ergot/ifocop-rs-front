@@ -13,12 +13,19 @@ class HomeCenterPosts extends React.Component {
     this.getPosts();
   }
 
+
+  // {"where": {"parentId": {"neq": null}}, "order": "dateCreated DESC"}
+  // {"where": {"parentId": {"eq": null}}, "order": "dateCreated DESC"}
+  // {"where": {"parentId": {"neq": null}}, "order": "dateCreated ASC"}
+  // {"where":{"parentId": null},  "order": "dateCreated DESC"}
+
   getPosts() {
     if (this.props.path === 'profile') {
       request
-        .get(`${process.env.REACT_APP_URL_API}/myUsers/${this.props.idUser}/walls`)
+        .get(`${process.env.REACT_APP_URL_API}/myUsers/${this.props.idUser}/walls?filter={"where":{"parentId": null}, "order": "dateCreated DESC"}`)
         .set('Authorization', sessionStorage.token)
-        .query({ filter: { order: 'dateCreated DESC' } })
+        // probleme avec null
+        // .query({ filter: { where: { parentId: 'null' }, order: 'dateCreated DESC' } })
         .end((err, res) => {
           if (res.statusCode === 200) {
             console.log('--- home center posts valide ---');
