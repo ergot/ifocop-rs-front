@@ -14,11 +14,11 @@ class SearchFriend extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    const APP = window.APP.reducer({ type: 'GETSTATE' });
+
 
     request
-      .get(`${APP.server.url}/myUsers/`)
-      .set('Authorization', APP.token.id)
+      .get(`${process.env.REACT_APP_URL_API}/myUsers/`)
+      .set('Authorization', sessionStorage.token)
       .end((err, res) => {
         if (res.statusCode === 200) {
           console.log('--- submit search friend  ---');

@@ -24,25 +24,24 @@ class FriendRequestTableTr extends React.Component {
 
   // Determine le profil en fonction du profil connecter
   getUserRender() {
-    const APP = window.APP.reducer({ type: 'GETSTATE' });
     let id = null;
 
     // le connecté fait une demande
-    if (APP.token.userId === this.state.value.sender) {
+    if (sessionStorage.userId === this.state.value.sender) {
       id = this.state.value.receiver;
       this.state.originRender = 'moi';
     }
 
     // le connecte recoit une demande
-    if (APP.token.userId === this.state.value.receiver) {
+    if (sessionStorage.userId === this.state.value.receiver) {
       id = this.state.value.sender;
       this.state.originRender = 'lui';
     }
 
 
     request
-      .get(`${APP.server.url}/myUsers/${id}`)
-      .set('Authorization', APP.token.id)
+      .get(`${process.env.REACT_APP_URL_API}/myUsers/${id}`)
+      .set('Authorization', sessionStorage.token)
       .end((err, res) => {
         console.log(res.body);
         if (res.statusCode === 200) {
@@ -55,10 +54,9 @@ class FriendRequestTableTr extends React.Component {
   }
 
   valideFr() {
-    const APP = window.APP.reducer({ type: 'GETSTATE' });
     request
-      .patch(`${APP.server.url}/friendsLists/${this.state.value._id}`)
-      .set('Authorization', APP.token.id)
+      .patch(`${process.env.REACT_APP_URL_API}/friendsLists/${this.state.value._id}`)
+      .set('Authorization', sessionStorage.token)
       .send({ isConfirmed: true })
       .end((err, res) => {
         if (res.statusCode === 200) {
@@ -71,10 +69,9 @@ class FriendRequestTableTr extends React.Component {
   }
 
   deleteFr() {
-    const APP = window.APP.reducer({ type: 'GETSTATE' });
     request
-      .delete(`${APP.server.url}/friendsLists/${this.state.value._id}`)
-      .set('Authorization', APP.token.id)
+      .delete(`${process.env.REACT_APP_URL_API}/friendsLists/${this.state.value._id}`)
+      .set('Authorization', sessionStorage.token)
       .end((err, res) => {
         if (res.statusCode === 200) {
           console.log('--- delete friend request table tr ---');
