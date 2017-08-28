@@ -81,7 +81,7 @@ class HomePosts extends React.Component {
 
         {renderHomePostComments}
 
-        <HomePostCommentInput parentId={this.props.value.id} userId={this.props.value.friendId} />
+        <HomePostCommentInput parentId={this.props.value.id} userId={this.props.value.friendId} refreshPosts={this.getComments}/>
 
       </div>
 

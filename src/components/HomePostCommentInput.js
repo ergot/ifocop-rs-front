@@ -29,7 +29,7 @@ class HomePostCommentInput extends React.Component {
       .end((err, res) => {
         if (res.statusCode === 200) {
           console.log('--- post wall profile comment ---');
-          //this.props.refreshPosts();
+          this.props.refreshPosts();
         } else {
           console.log('--- post wall profile comment FAIL ---');
         }
