@@ -1,8 +1,10 @@
 import React from 'react';
 import request from 'superagent';
 import PropTypes from 'prop-types';
+import Async from 'async';
 import HomePostStateForm from './HomePostStateForm';
 import HomePosts from './HomePosts';
+
 
 class HomeCenterPosts extends React.Component {
   constructor(props) {
@@ -32,6 +34,24 @@ class HomeCenterPosts extends React.Component {
             this.setState({ posts: res.body });
           } else {
             console.log('--- home center posts error ---');
+          }
+        });
+    }
+
+    if (this.props.path === 'home') {
+      request
+        .get(`${process.env.REACT_APP_URL_API}/walls`)
+        .set('Authorization', sessionStorage.token)
+        .query({filter: { order: 'dateCreated DESC' }})
+        .end((err, res) => {
+          console.log(res.body);
+          if (res.statusCode === 200) {
+            console.log('--- get friend request  ---');
+            res.body.map((element) => {
+
+            });
+          } else {
+            console.log('--- get friend request error ---');
           }
         });
     }
