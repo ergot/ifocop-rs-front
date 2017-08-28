@@ -1,18 +1,38 @@
 import React from 'react';
 import request from 'superagent';
-
+import HomePostCommentInput from './HomePostCommentInput';
+import HomePostComment from './HomePostComment';
 
 class HomePosts extends React.Component {
   constructor(props) {
     super(props);
     this.getOwnerPost = this.getOwnerPost.bind(this);
+    this.getComments = this.getComments.bind(this);
     this.state = {
       firstName: null,
       lastName: null,
       dateCreated: this.props.value.dateCreated,
       message: this.props.value.message,
+      id: this.props.value.id,
+      comments: null,
     };
     this.getOwnerPost();
+    this.getComments();
+  }
+
+  getComments() {
+    request
+      .get(`${process.env.REACT_APP_URL_API}/myUsers/${this.props.value.friendId}/walls`)
+      .set('Authorization', sessionStorage.token)
+      .query({ filter: { where: { parentId: `pre${this.state.id}` } } })
+      .end((err, res) => {
+        if (res.statusCode === 200) {
+          console.log('--- home posts / get comments ---');
+          this.setState({ comments: res.body });
+        } else {
+          console.log('--- home posts / get comments error ---');
+        }
+      });
   }
 
   getOwnerPost() {
@@ -31,6 +51,13 @@ class HomePosts extends React.Component {
 
 
   render() {
+    const renderHomePostComments = [];
+    if (this.state.comments !== null) {
+      this.state.comments.map((comment) => {
+        renderHomePostComments.push(<HomePostComment key={comment.id} value={comment} />);
+      });
+    }
+
     return (
       <div className="box box-widget">
         <div className="box-header with-border">
@@ -51,40 +78,11 @@ class HomePosts extends React.Component {
           <button type="button" className="btn btn-default btn-xs"><i className="fa fa-thumbs-o-up" /> Like</button>
           <span className="pull-right text-muted">127 likes - 3 comments</span>
         </div>
-        <div className="box-footer box-comments" style={{ display: 'block' }}>
-          <div className="box-comment">
-            <img className="img-circle img-sm" src="/img/Friends/guy-2.jpg" alt="User Image" />
-            <div className="comment-text">
-              <span className="username">
-                          Maria Gonzales
-                <span className="text-muted pull-right">8:03 PM Today</span>
-              </span>
-                            It is a long established fact that a reader will be distracted
-                            by the readable content of a page when looking at its layout.
-            </div>
-          </div>
 
-          {/* <div className="box-comment"> */}
-          {/* <img className="img-circle img-sm" src="/img/Friends/guy-3.jpg" alt="User Image" /> */}
-          {/* <div className="comment-text"> */}
-          {/* <span className="username"> */}
-          {/* Luna Stark */}
-          {/* <span className="text-muted pull-right">8:03 PM Today</span> */}
-          {/* </span> */}
-          {/* It is a long established fact that a reader will be distracted */}
-          {/* by the readable content of a page when looking at its layout. */}
-          {/* </div> */}
-          {/* </div> */}
+        {renderHomePostComments}
 
-        </div>
-        <div className="box-footer" style={{ display: 'block' }}>
-          <form action="#" method="post">
-            <img className="img-responsive img-circle img-sm" src="/img/Friends/guy-3.jpg" alt="Alt Text" />
-            <div className="img-push">
-              <input type="text" className="form-control input-sm" placeholder="Press enter to post comment" />
-            </div>
-          </form>
-        </div>
+        <HomePostCommentInput parentId={this.props.value.id} userId={this.props.value.friendId} />
+
       </div>
 
     );
