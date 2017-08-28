@@ -39,21 +39,64 @@ class HomeCenterPosts extends React.Component {
     }
 
     if (this.props.path === 'home') {
-      request
-        .get(`${process.env.REACT_APP_URL_API}/walls`)
-        .set('Authorization', sessionStorage.token)
-        .query({filter: { order: 'dateCreated DESC' }})
-        .end((err, res) => {
-          console.log(res.body);
-          if (res.statusCode === 200) {
-            console.log('--- get friend request  ---');
-            res.body.map((element) => {
-
+      Async.parallel([
+        // recupère tous le wall
+        function (callback) {
+          request
+            .get(`${process.env.REACT_APP_URL_API}/walls?filter={"where":{"parentId": null}, "order": "dateCreated DESC"}`)
+            .set('Authorization', sessionStorage.token)
+            // .query({ filter: { where: { parentId: `null` }, order: 'dateCreated DESC' } })
+            .end((err, res) => {
+              if (res.statusCode === 200) {
+                console.log('--- get friend request  ---');
+                callback(null, res.body);
+              } else {
+                console.log('--- get friend request error ---');
+              }
             });
+        },
+        // recupere tous les friends de l user
+        function (callback) {
+          request
+            .get(`${process.env.REACT_APP_URL_API}/friendsLists/getFriendship`)
+            .query({ idUser: sessionStorage.userId, isConfirmed: true })
+            .set('Authorization', sessionStorage.token)
+            .end((err, res) => {
+              if (res.statusCode === 200) {
+                console.log('--- get friend request  ---');
+                callback(null, ...res.body.friendship);
+              } else {
+                console.log('--- get friend request error ---');
+              }
+            });
+        },
+      ], (err, results) => {
+        console.log('async');
+        console.log(results);
+        const idFriends = [];
+        results[1].map((friendship) => {
+          if (friendship.receiver === sessionStorage.userId) {
+            idFriends.push(friendship.sender);
           } else {
-            console.log('--- get friend request error ---');
+            idFriends.push(friendship.receiver);
           }
         });
+        idFriends.push(sessionStorage.userId);
+        console.log(idFriends);
+
+        const posts = [];
+        for (const idFriend of idFriends) {
+          // console.log(results[0].length)
+          for (let i = 0; results[0].length > i; i++) {
+            if (results[0][i].myUserId === idFriend) {
+              posts.push(results[0][i]);
+            }
+          }
+        }
+
+
+        this.setState({ posts: posts });
+      });
     }
   }
 
