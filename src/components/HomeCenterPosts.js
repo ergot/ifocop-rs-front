@@ -48,10 +48,10 @@ class HomeCenterPosts extends React.Component {
             // .query({ filter: { where: { parentId: `null` }, order: 'dateCreated DESC' } })
             .end((err, res) => {
               if (res.statusCode === 200) {
-                console.log('--- get friend request  ---');
+                console.log('--- get wall  ---');
                 callback(null, res.body);
               } else {
-                console.log('--- get friend request error ---');
+                console.log('--- get wall error ---');
               }
             });
         },
@@ -63,17 +63,18 @@ class HomeCenterPosts extends React.Component {
             .set('Authorization', sessionStorage.token)
             .end((err, res) => {
               if (res.statusCode === 200) {
-                console.log('--- get friend request  ---');
-                callback(null, ...res.body.friendship);
+                console.log('--- get friendship request  ---');
+                console.log(res.body);
+                // @warning ...[{}] != [{}, {}]
+                callback(null, res.body.friendship);
               } else {
-                console.log('--- get friend request error ---');
+                console.log('--- get friendship request error ---');
               }
             });
         },
       ], (err, results) => {
-        console.log('async');
-        console.log(results);
         const idFriends = [];
+        console.log(results);
         results[1].map((friendship) => {
           if (friendship.receiver === sessionStorage.userId) {
             idFriends.push(friendship.sender);
@@ -82,7 +83,6 @@ class HomeCenterPosts extends React.Component {
           }
         });
         idFriends.push(sessionStorage.userId);
-        console.log(idFriends);
 
         const posts = [];
         for (const idFriend of idFriends) {
@@ -94,8 +94,7 @@ class HomeCenterPosts extends React.Component {
           }
         }
 
-
-        this.setState({ posts: posts });
+        this.setState({ posts });
       });
     }
   }
