@@ -25,14 +25,12 @@ class FriendRequest extends React.Component {
   }
 
   getFriendship() {
-    const APP = window.APP.reducer({ type: 'GETSTATE' });
 
     request
-      .get(`${APP.server.url}/friendsLists/getFriendship`)
-      .set('Authorization', APP.token.id)
-      .query({ idUser: APP.token.userId, isConfirmed:false})
+      .get(`${process.env.REACT_APP_URL_API}/friendsLists/getFriendship`)
+      .set('Authorization', sessionStorage.token)
+      .query({ idUser: sessionStorage.userId, isConfirmed:false})
       .end((err, res) => {
-        console.log(res.body);
         if (res.statusCode === 200) {
           console.log('--- get friend request  ---');
           this.setState({ friendship: res.body.friendship });
