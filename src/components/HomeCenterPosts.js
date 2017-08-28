@@ -134,7 +134,7 @@ class HomeCenterPosts extends React.Component {
             <div className="row">
               <div className="col-md-12">
                 {/* <!-- post state form --> */}
-                <HomePostStateForm idUser={this.props.idUser} refreshPosts={this.refreshPosts} />
+                <HomePostStateForm idUser={this.props.idUser || sessionStorage.userId} refreshPosts={this.refreshPosts} />
                 {/* <!--   posts --> */}
                 {/* <HomePosts /> */}
 
