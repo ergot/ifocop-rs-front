@@ -83,14 +83,14 @@ class HomeCenterPosts extends React.Component {
         idFriends.push(sessionStorage.userId);
 
         const posts = [];
-        for (const idFriend of idFriends) {
-          // console.log(results[0].length)
-          for (let i = 0; results[0].length > i; i++) {
-            if (results[0][i].myUserId === idFriend) {
-              posts.push(results[0][i]);
+
+        results[0].map((element) => {
+          for (const idFriend of idFriends) {
+            if (element.myUserId === idFriend) {
+              posts.push(element);
             }
           }
-        }
+        });
 
         this.setState({ posts });
       });
