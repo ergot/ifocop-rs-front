@@ -14,8 +14,6 @@ class SearchFriend extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
 
-
-
     request
       .get(`${process.env.REACT_APP_URL_API}/myUsers/`)
       .set('Authorization', sessionStorage.token)
@@ -27,7 +25,7 @@ class SearchFriend extends React.Component {
           res.body.map((user) => {
             const regex = new RegExp(this.state.value, 'g');
 
-            if (user.email.search(regex) > -1) {
+            if ((user.firstName.search(regex) > -1) || (user.lastName.search(regex) > -1)) {
               return results.push(user);
             }
           });
@@ -48,7 +46,7 @@ class SearchFriend extends React.Component {
           <div className="row">
             <form role="form" onSubmit={this.handleSubmit}>
               <span className="input-icon ">
-                <input className="form-control input-xl" type="text" placeholder="Press Enter" onChange={event => this.setState({ value: event.target.value })} />
+                <input className="form-control input-xl" type="text" placeholder="Press Enter or search by firsName, lastName" onChange={event => this.setState({ value: event.target.value })} />
                 <i className="glyphicon glyphicon-search  circular" />
               </span>
             </form>
