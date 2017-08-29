@@ -64,7 +64,6 @@ class HomeCenterPosts extends React.Component {
             .end((err, res) => {
               if (res.statusCode === 200) {
                 console.log('--- get friendship request  ---');
-                console.log(res.body);
                 // @warning ...[{}] != [{}, {}]
                 callback(null, res.body.friendship);
               } else {
@@ -74,7 +73,6 @@ class HomeCenterPosts extends React.Component {
         },
       ], (err, results) => {
         const idFriends = [];
-        console.log(results);
         results[1].map((friendship) => {
           if (friendship.receiver === sessionStorage.userId) {
             idFriends.push(friendship.sender);
