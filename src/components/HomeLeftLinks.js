@@ -8,10 +8,11 @@ class HomeLeftLinks extends React.Component {
     this.state = {
       user: {
         firstName: 'Loading',
-          lastName: '...'
+        lastName: '...',
+        profilePicture: 'https://randomuser.me/api/portraits/lego/5.jpg',
       },
 
-    }
+    };
     this.getUser(sessionStorage.userId);
   }
 
@@ -37,7 +38,7 @@ class HomeLeftLinks extends React.Component {
             <div className="widget-body">
               <div className="user-heading round">
                 <a href="#">
-                  <img src="img/Friends/guy-3.jpg" alt="" />
+                  <img src={this.state.user.pictureProfile} alt="" />
                 </a>
                 <h1>{this.state.user.firstName } {this.state.user.lastName}</h1>
                 {/* <p>@username</p> */}
