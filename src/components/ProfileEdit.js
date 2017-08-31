@@ -13,7 +13,6 @@ class ProfileEdit extends React.Component {
     this.submitForm = this.submitForm.bind(this);
     this.updateStateParent = this.updateStateParent.bind(this);
     this.getDataUser = this.getDataUser.bind(this);
-    this.onSuccessFile = this.onSuccessFile.bind(this);
     this.getDataUser();
     this._notificationSystem = null;
     this.state = {
@@ -36,7 +35,6 @@ class ProfileEdit extends React.Component {
           this.inputAge.handleChange({ target: { value: res.body.age } });
           this.inputPresentation.handleChange({ target: { value: res.body.presentation } });
           this.inputPicture.handleChange({ target: { value: res.body.picture } });
-          this.setState({pictureProfile: res.body.pictureProfile})
           this.setState({pictureProfile: res.body.pictureProfile})
           this.setState({pictureProfileHeader: res.body.pictureProfileHeader})
         } else {
@@ -77,12 +75,6 @@ class ProfileEdit extends React.Component {
     this.setState(temp);
   }
 
-  onSuccessFile(result, input) {
-    console.log('success');
-    console.log(input);
-    console.log(result);
-  }
-
   render() {
     const options = {
       accept: 'image/*',
@@ -110,7 +102,7 @@ class ProfileEdit extends React.Component {
                     <ProfileEditInput label="Age" updateStateParent={this.updateStateParent} id="age" ref={(input) => { this.inputAge = input; }} />
                     <ProfileEditInput label="Présentation" updateStateParent={this.updateStateParent} id="presentation" ref={(input) => { this.inputPresentation = input; }} />
                     <ProfileEditInput label="Photo" updateStateParent={this.updateStateParent} id="picture" ref={(input) => { this.inputPicture = input; }} />
-
+                    {/*pictureProfile*/}
                     <div className="form-group">
                       <label htmlFor="definpu" className="col-sm-3 control-label">
                         <ReactFilestack
@@ -136,6 +128,30 @@ class ProfileEdit extends React.Component {
                         />
                       </div>
 
+                    </div>
+
+                    {/*pictureProfileHeader*/}
+                    <div className="form-group">
+                      <label htmlFor="definpu" className="col-sm-3 control-label">
+                        <ReactFilestack
+                          apikey={process.env.REACT_APP_FILEPICKER_API_KEY}
+                          buttonText="Photo Background Profile"
+                          buttonClass="classname"
+                          options={options}
+                          onSuccess={(result) => {
+                            this.setState({ pictureProfileHeader: result.filesUploaded[0].url });
+                          }}
+                        />
+                      </label>
+                      <div className="col-sm-4">
+                        <input
+                          type="text"
+                          id="pictureProfileHeader"
+                          name="pictureProfileHeader"
+                          className="form-control"
+                          value={this.state.pictureProfileHeader}
+                        />
+                      </div>
                     </div>
 
                   </form>
