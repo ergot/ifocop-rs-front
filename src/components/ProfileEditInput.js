@@ -10,7 +10,7 @@ class ProfileEditInput extends React.Component {
 
   handleChange(event) {
     this.setState({ value: event.target.value }, () => {
-        this.props.updateStateParent(this.props.id, this.state.value);
+      this.props.updateStateParent(this.props.id, this.state.value);
     });
   }
 

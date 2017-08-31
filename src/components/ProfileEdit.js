@@ -1,5 +1,7 @@
+/* eslint-disable max-len */
 import React from 'react';
 import NotificationSystem from 'react-notification-system';
+import ReactFilestack from 'filestack-react';
 import Header from './Header';
 import Footer from './Footer';
 import ProfileEditInput from './ProfileEditInput';
@@ -11,8 +13,13 @@ class ProfileEdit extends React.Component {
     this.submitForm = this.submitForm.bind(this);
     this.updateStateParent = this.updateStateParent.bind(this);
     this.getDataUser = this.getDataUser.bind(this);
+    this.onSuccessFile = this.onSuccessFile.bind(this);
     this.getDataUser();
     this._notificationSystem = null;
+    this.state = {
+      pictureProfile: '',
+      pictureProfileHeader: '',
+    };
   }
 
   getDataUser() {
@@ -29,14 +36,18 @@ class ProfileEdit extends React.Component {
           this.inputAge.handleChange({ target: { value: res.body.age } });
           this.inputPresentation.handleChange({ target: { value: res.body.presentation } });
           this.inputPicture.handleChange({ target: { value: res.body.picture } });
+          this.setState({pictureProfile: res.body.pictureProfile})
+          this.setState({pictureProfile: res.body.pictureProfile})
+          this.setState({pictureProfileHeader: res.body.pictureProfileHeader})
         } else {
           console.log('--- get data user FAIL ---');
         }
       });
   }
 
-  submitForm() {
+  submitForm(event) {
     console.log('--- submit profile edit ---');
+      event.preventDefault();
 
     request
       .patch(`${process.env.REACT_APP_URL_API}/myUsers/${sessionStorage.userId}`)
@@ -66,8 +77,21 @@ class ProfileEdit extends React.Component {
     this.setState(temp);
   }
 
+  onSuccessFile(result, input) {
+    console.log('success');
+    console.log(input);
+    console.log(result);
+  }
 
   render() {
+    const options = {
+      accept: 'image/*',
+      maxFiles: 1,
+      storeTo: {
+        location: 's3',
+      },
+    };
+
     return (
       <div>
 
@@ -86,6 +110,34 @@ class ProfileEdit extends React.Component {
                     <ProfileEditInput label="Age" updateStateParent={this.updateStateParent} id="age" ref={(input) => { this.inputAge = input; }} />
                     <ProfileEditInput label="Présentation" updateStateParent={this.updateStateParent} id="presentation" ref={(input) => { this.inputPresentation = input; }} />
                     <ProfileEditInput label="Photo" updateStateParent={this.updateStateParent} id="picture" ref={(input) => { this.inputPicture = input; }} />
+
+                    <div className="form-group">
+                      <label htmlFor="definpu" className="col-sm-3 control-label">
+                        <ReactFilestack
+                          apikey={process.env.REACT_APP_FILEPICKER_API_KEY}
+                          buttonText="Photo Profile"
+                          buttonClass="classname"
+                          options={options}
+                          onSuccess={(result) => {
+                            console.log('picture file');
+                            console.log(result);
+                            console.log(result.filesUploaded[0].url);
+                            this.setState({ pictureProfile: result.filesUploaded[0].url });
+                          }}
+                        />
+                      </label>
+                      <div className="col-sm-4">
+                        <input
+                          type="text"
+                          id="pictureProfile"
+                          name="pictureProfile"
+                          className="form-control"
+                          value={this.state.pictureProfile}
+                        />
+                      </div>
+
+                    </div>
+
                   </form>
                   <p className="text-center">
                     <a href="#" className="btn btn-custom-primary" onClick={this.submitForm}>
