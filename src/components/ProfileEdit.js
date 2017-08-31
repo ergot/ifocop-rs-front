@@ -1,4 +1,5 @@
 import React from 'react';
+import NotificationSystem from 'react-notification-system';
 import Header from './Header';
 import Footer from './Footer';
 import ProfileEditInput from './ProfileEditInput';
@@ -11,10 +12,10 @@ class ProfileEdit extends React.Component {
     this.updateStateParent = this.updateStateParent.bind(this);
     this.getDataUser = this.getDataUser.bind(this);
     this.getDataUser();
+    this._notificationSystem = null;
   }
 
   getDataUser() {
-    console.log('--- component did mount ---');
     request
       .get(`${process.env.REACT_APP_URL_API}/myUsers/${sessionStorage.userId}`)
       .set('Authorization', sessionStorage.token)
@@ -42,11 +43,19 @@ class ProfileEdit extends React.Component {
       .set('Authorization', sessionStorage.token)
       .send(this.state)
       .end((err, res) => {
-        console.log(res.body);
         if (res.statusCode === 200) {
           console.log('--- edit profil valid ---');
+          this._notificationSystem.addNotification({
+            message: 'Profile edité',
+            level: 'success',
+          });
         } else {
           console.log('--- edit profil NON valid ---');
+          this._notificationSystem.addNotification({
+            message: 'Profile non edité',
+            level: 'error',
+            position: 'br',
+          });
         }
       });
   }
@@ -61,6 +70,7 @@ class ProfileEdit extends React.Component {
   render() {
     return (
       <div>
+
         <Header />
         <div className="container page-content">
           <div className="row">
@@ -80,8 +90,9 @@ class ProfileEdit extends React.Component {
                   <p className="text-center">
                     <a href="#" className="btn btn-custom-primary" onClick={this.submitForm}>
                       <i className="fa fa-floppy-o" /> Save Changes</a></p>
-                </div>
 
+                </div>
+                <NotificationSystem ref={(notif) => { this._notificationSystem = notif; }} />
               </div>
             </div>
           </div>
