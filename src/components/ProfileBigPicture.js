@@ -37,15 +37,17 @@ class ProfileBigPicture extends React.Component {
     const firstName = this.state.user ? this.state.user.firstName : 'firstName';
     const lastName = this.state.user ? this.state.user.lastName : 'lastName';
     const pseudo = this.state.user ? this.state.user.pseudo : 'pseudo';
+    const pictureProfileHeader = this.state.user ? this.state.user.pictureProfileHeader: '';
+    const pictureProfile = this.state.user ? this.state.user.pictureProfile: '';
 
     return (
-      <div className="bg-picture" style={{ backgroundImage: "url('/img/Cover/cover.jpg')" }}>
+      <div className="bg-picture" style={{ backgroundImage:  `url(${pictureProfileHeader})` }}>
         <span className="bg-picture-overlay" /> {/* <!-- overlay --> */}
         {/* <!-- meta --> */}
         <div className="box-layout meta bottom">
           <div className="col-md-6 clearfix">
             <span className="img-wrapper pull-left m-r-15">
-              <img src="/img/Friends/guy-3.jpg" alt="" style={{ width: '64px' }} className="br-radius" />
+              <img src={pictureProfile} alt="" style={{ width: '64px' }} className="br-radius" />
             </span>
             <div className="media-body">
               <h3 className="text-white mb-2 m-t-10 ellipsis">{firstName} {lastName}</h3>
