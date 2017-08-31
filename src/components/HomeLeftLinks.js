@@ -1,6 +1,34 @@
 import React from 'react';
+import request from 'superagent';
 
 class HomeLeftLinks extends React.Component {
+  constructor(props) {
+    super(props);
+    this.getUser = this.getUser.bind(this);
+    this.state = {
+      user: {
+        firstName: 'Loading',
+          lastName: '...'
+      },
+
+    }
+    this.getUser(sessionStorage.userId);
+  }
+
+  getUser(idUser) {
+    request
+      .get(`${sessionStorage.pathApi}/myUsers/${idUser}`)
+      .set('Authorization', sessionStorage.token)
+      .end((err, res) => {
+        if (res.statusCode === 200) {
+          console.log('--- profil big picture / get data user ---');
+          this.setState({ user: res.body });
+        } else {
+          console.log('--- profil big picture / get data user FAIL ---');
+        }
+      });
+  }
+
   render() {
     return (
       <div className="col-md-3">
@@ -11,12 +39,12 @@ class HomeLeftLinks extends React.Component {
                 <a href="#">
                   <img src="img/Friends/guy-3.jpg" alt="" />
                 </a>
-                <h1>John Breakgrow</h1>
-                {/*<p>@username</p>*/}
+                <h1>{this.state.user.firstName } {this.state.user.lastName}</h1>
+                {/* <p>@username</p> */}
               </div>
 
               <ul className="nav nav-pills nav-stacked">
-                {/*<li className="active"><a href="#"> <i className="fa fa-user" /> News feed</a></li>*/}
+                {/* <li className="active"><a href="#"> <i className="fa fa-user" /> News feed</a></li> */}
                 <li>
                   <a href="#">
                     <i className="fa fa-envelope" /> Messages
@@ -31,17 +59,17 @@ class HomeLeftLinks extends React.Component {
             </div>
           </div>
 
-          {/*<div className="widget">*/}
-            {/*<div className="widget-body">*/}
-              {/*<ul className="nav nav-pills nav-stacked">*/}
-                {/*<li><a href="#"> <i className="fa fa-globe" /> Pages</a></li>*/}
-                {/*<li><a href="#"> <i className="fa fa-gamepad" /> Games</a></li>*/}
-                {/*<li><a href="#"> <i className="fa fa-puzzle-piece" /> Ads</a></li>*/}
-                {/*<li><a href="#"> <i className="fa fa-home" /> Markerplace</a></li>*/}
-                {/*<li><a href="#"> <i className="fa fa-users" /> Groups</a></li>*/}
-              {/*</ul>*/}
-            {/*</div>*/}
-          {/*</div>*/}
+          {/* <div className="widget"> */}
+          {/* <div className="widget-body"> */}
+          {/* <ul className="nav nav-pills nav-stacked"> */}
+          {/* <li><a href="#"> <i className="fa fa-globe" /> Pages</a></li> */}
+          {/* <li><a href="#"> <i className="fa fa-gamepad" /> Games</a></li> */}
+          {/* <li><a href="#"> <i className="fa fa-puzzle-piece" /> Ads</a></li> */}
+          {/* <li><a href="#"> <i className="fa fa-home" /> Markerplace</a></li> */}
+          {/* <li><a href="#"> <i className="fa fa-users" /> Groups</a></li> */}
+          {/* </ul> */}
+          {/* </div> */}
+          {/* </div> */}
 
         </div>
       </div>
