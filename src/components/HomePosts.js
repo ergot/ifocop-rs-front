@@ -11,6 +11,7 @@ class HomePosts extends React.Component {
     this.state = {
       firstName: null,
       lastName: null,
+      pictureProfile: null,
       dateCreated: this.props.value.dateCreated,
       message: this.props.value.message,
       id: this.props.value.id,
@@ -42,7 +43,7 @@ class HomePosts extends React.Component {
       .end((err, res) => {
         if (res.statusCode === 200) {
           console.log('--- home posts / owner valide ---');
-          this.setState({ firstName: res.body.firstName, lastName: res.body.lastName });
+          this.setState({ firstName: res.body.firstName, lastName: res.body.lastName, pictureProfile: res.body.pictureProfile });
         } else {
           console.log('--- home posts / owner error ---');
         }
@@ -62,7 +63,7 @@ class HomePosts extends React.Component {
       <div className="box box-widget">
         <div className="box-header with-border">
           <div className="user-block">
-            <img className="img-circle" src="/img/Friends/guy-3.jpg" alt="User Image" />
+            <img className="img-circle" src={this.state.pictureProfile} alt="User Image" />
             <span className="username"><a href="#">{this.state.firstName} {this.state.lastName}</a></span>
             <span className="description">Shared publicly : {this.state.dateCreated}</span>
           </div>
@@ -81,7 +82,7 @@ class HomePosts extends React.Component {
 
         {renderHomePostComments}
 
-        <HomePostCommentInput parentId={this.props.value.id} userId={this.props.value.friendId} refreshPosts={this.getComments}/>
+        <HomePostCommentInput parentId={this.props.value.id} userId={this.props.value.friendId} refreshPosts={this.getComments} />
 
       </div>
 
