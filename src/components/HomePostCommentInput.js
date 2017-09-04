@@ -7,9 +7,12 @@ class HomePostCommentInput extends React.Component {
     this.handleResponse = this.handleResponse.bind(this);
     this.submitComment = this.submitComment.bind(this);
     this.handleInput = this.handleInput.bind(this);
+    this.getUser = this.getUser.bind(this);
+    this.getUser();
     this.state = {
       parentId: this.props.parentId,
       message: '',
+      user: { pictureProfile: '' },
     };
   }
   handleInput(event) {
@@ -19,6 +22,20 @@ class HomePostCommentInput extends React.Component {
   handleResponse(event) {
     event.preventDefault();
     this.submitComment();
+  }
+
+  getUser() {
+    request
+      .get(`${sessionStorage.pathApi}/myUsers/${sessionStorage.userId}`)
+      .set('Authorization', sessionStorage.token)
+      .end((err, res) => {
+        if (res.statusCode === 200) {
+          console.log('--- home posts comment input / get data user ---');
+          this.setState({ user: res.body });
+        } else {
+          console.log('--- home posts comment input / get data user FAIL ---');
+        }
+      });
   }
 
   submitComment() {
@@ -40,14 +57,14 @@ class HomePostCommentInput extends React.Component {
     return (
 
 
-        <div className="box-footer" style={{ display: 'block' }}>
-          <form onSubmit={this.handleResponse}>
-            <img className="img-responsive img-circle img-sm" src="/img/Friends/guy-3.jpg" alt="Alt Text" />
-            <div className="img-push">
-              <input type="text" className="form-control input-sm" placeholder="Press enter to post comment" onChange={this.handleInput} />
-            </div>
-          </form>
-        </div>
+      <div className="box-footer" style={{ display: 'block' }}>
+        <form onSubmit={this.handleResponse}>
+          <img className="img-responsive img-circle img-sm" src={this.state.user.pictureProfile} alt="Alt Text" />
+          <div className="img-push">
+            <input type="text" className="form-control input-sm" placeholder="Press enter to post comment" onChange={this.handleInput} />
+          </div>
+        </form>
+      </div>
 
     );
   }

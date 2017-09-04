@@ -20,7 +20,7 @@ class HomePostComment extends React.Component {
       .end((err, res) => {
         if (res.statusCode === 200) {
           console.log('--- home posts comments / get data user ---');
-          this.setState({ owner: `${res.body.firstName} ${res.body.lastName}` });
+          this.setState({ owner: `${res.body.firstName} ${res.body.lastName}`, pictureProfile: res.body.pictureProfile });
         } else {
           console.log('--- home posts comments / get data user FAIL ---');
         }
@@ -32,7 +32,7 @@ class HomePostComment extends React.Component {
 
       <div className="box-footer box-comments" style={{ display: 'block' }}>
         <div className="box-comment">
-          <img className="img-circle img-sm" src="/img/Friends/guy-2.jpg" alt="User Image" />
+          <img className="img-circle img-sm" src={this.state.pictureProfile} alt="User Image" />
           <div className="comment-text">
             <span className="username">
               {this.state.owner || 'Loading...'}
