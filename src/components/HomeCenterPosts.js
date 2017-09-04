@@ -116,7 +116,7 @@ class HomeCenterPosts extends React.Component {
     const renderHomePosts = [];
     if (this.state.posts !== null) {
       this.state.posts.map((post) => {
-        renderHomePosts.push(<HomePosts key={post.id} value={post} />);
+        renderHomePosts.push(<HomePosts key={post.id} value={post} path={this.props.path} />);
       });
     }
 
