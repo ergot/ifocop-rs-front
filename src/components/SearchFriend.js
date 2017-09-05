@@ -26,7 +26,9 @@ class SearchFriend extends React.Component {
             const regex = new RegExp(this.state.value, 'g');
 
             if ((user.firstName.search(regex) > -1) || (user.lastName.search(regex) > -1)) {
-              return results.push(user);
+              if (user.id !== sessionStorage.userId) {
+                return results.push(user);
+              }
             }
           });
 
@@ -55,7 +57,7 @@ class SearchFriend extends React.Component {
           <p />
 
           <div className="row">
-            <ProfileFriends friends={this.state.results}  />
+            <ProfileFriends friends={this.state.results} />
           </div>
 
         </div>
