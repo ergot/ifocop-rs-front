@@ -98,7 +98,7 @@ class FriendRequestTableTr extends React.Component {
     return (
       <tr>
         <td>
-          <img src="img/Friends/guy-2.jpg" alt="" />
+          <img src={this.state.userRender.pictureProfile} alt="" />
           <a href="#" className="user-link">{this.state.userRender.firstName} {this.state.userRender.lastName}</a>
           <span className="user-subhead">Member</span>
         </td>

@@ -45,7 +45,7 @@ class ProfileFriendsContact extends React.Component {
         <div className="contact-box center-version">
           {/* <Link to='/profile' params={{idUser: this.state.id}}> */}
           <Link to={{ pathname: `/profile/${this.state.id}` }} >
-            <img alt="image" className="img-circle" src="/img/Friends/woman-1.jpg" />
+            <img alt="image" className="img-circle" src={this.state.pictureProfile} />
             <h5 className="m-b-xs"><strong>{this.state.firstName} {this.state.lastName}</strong></h5>
           </Link>
           {/* <a href="#"> */}
