@@ -15,7 +15,6 @@ class Friends extends React.Component {
   }
 
   getAllFriends() {
-
     request
       .get(`${process.env.REACT_APP_URL_API}/friendsLists/getFriendship`)
       .query({ idUser: sessionStorage.userId, isConfirmed: true })
@@ -73,6 +72,14 @@ class Friends extends React.Component {
   }
 
   render() {
+    let renderFriends = null;
+    if (this.state.friends.length === 0) {
+      renderFriends = <p>pas de résultats</p>;
+    } else {
+      renderFriends = <ProfileFriends friends={this.state.friends} />;
+    }
+
+
     return (
       <div>
         <Header />
@@ -82,7 +89,7 @@ class Friends extends React.Component {
           </div>
           <p />
           <div className="row">
-            <ProfileFriends friends={this.state.friends} />
+            {renderFriends}
           </div>
 
         </div>
