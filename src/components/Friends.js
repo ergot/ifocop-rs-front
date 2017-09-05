@@ -14,7 +14,7 @@ class Friends extends React.Component {
     this.state = { friends: [] };
   }
 
-  getAllFriends() {
+  getAllFriends(searchName = null) {
     request
       .get(`${process.env.REACT_APP_URL_API}/friendsLists/getFriendship`)
       .query({ idUser: sessionStorage.userId, isConfirmed: true })
@@ -29,13 +29,23 @@ class Friends extends React.Component {
           res.body.friendship.map((friendship) => {
             // eslint-disable-next-line max-len
             friendship.sender === sessionStorage.userId ? idFriend = friendship.receiver : idFriend = friendship.sender;
-            console.log(idFriend);
             request.get(`${process.env.REACT_APP_URL_API}/myUsers/${idFriend}`)
               .set('Authorization', sessionStorage.token)
               .end((err, res) => {
                 if (res.statusCode === 200) {
                   console.log('--- submit friends / user ---');
-                  this.setState({ friends: [...this.state.friends, res.body] });
+                  if (searchName === null) {
+                    this.setState({ friends: [...this.state.friends, res.body] });
+                  } else {
+                    const regex = new RegExp(searchName, 'g');
+                    if (res.body.lastName.search(regex) > -1) {
+                      return this.setState({ friends: [...this.state.friends, res.body] });
+                    }
+
+                    if (res.body.firstName.search(regex) > -1) {
+                      return this.setState({ friends: [...this.state.friends, res.body] });
+                    }
+                  }
                 } else {
                   console.log('--- submit friends / user ERROR ---');
                 }
@@ -48,26 +58,12 @@ class Friends extends React.Component {
   }
 
   findFriends(value) {
-    console.log(value);
-
     if (value === '') {
       this.setState({ friends: [] });
       this.getAllFriends();
     } else {
-      const results = [];
-      this.state.friends.map((user) => {
-        const regex = new RegExp(value, 'g');
-
-        if (user.lastName.search(regex) > -1) {
-          return results.push(user);
-        }
-
-        if (user.firstName.search(regex) > -1) {
-          return results.push(user);
-        }
-      });
-
-      this.setState({ friends: results });
+      this.setState({ friends: [] });
+      this.getAllFriends(value);
     }
   }
 
@@ -78,7 +74,6 @@ class Friends extends React.Component {
     } else {
       renderFriends = <ProfileFriends friends={this.state.friends} />;
     }
-
 
     return (
       <div>
@@ -91,11 +86,9 @@ class Friends extends React.Component {
           <div className="row">
             {renderFriends}
           </div>
-
         </div>
         <Footer />
       </div>
-
     );
   }
 }
