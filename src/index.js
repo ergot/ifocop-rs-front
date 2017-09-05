@@ -20,6 +20,10 @@ if (sessionStorage.token === undefined) {
   sessionStorage.setItem('userId', null);
 }
 
+if (sessionStorage.token === 'null' && window.location.href !== process.env.REACT_APP_HOST) {
+  window.location.replace(process.env.REACT_APP_HOST);
+}
+
 ReactDOM.render((
   <BrowserRouter>
     <Switch>
