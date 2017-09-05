@@ -25,8 +25,17 @@ class HomePosts extends React.Component {
 
   setPrefixeTtitle() {
     if (this.props.path === 'home') {
+      if (this.props.value.friendId === this.props.value.myUserId) {
+        return this.setState({ title: `${this.state.firstName} ${this.state.lastName} ` });
+      }
+
+      let userId = sessionStorage.userId;
+      if (sessionStorage.userId === this.props.value.friendId) {
+        userId = this.props.value.myUserId;
+      }
+
       request
-        .get(`${process.env.REACT_APP_URL_API}/myUsers/${sessionStorage.userId} `)
+        .get(`${process.env.REACT_APP_URL_API}/myUsers/${userId} `)
         .set('Authorization', sessionStorage.token)
         .end((err, res) => {
           if (res.statusCode === 200) {
