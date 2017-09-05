@@ -1,4 +1,5 @@
 #!/bin/bash
+git push
 yarn build
 rm ../ifocop-RS/client -r
 cp build ../ifocop-RS/client -r
