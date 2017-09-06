@@ -110,8 +110,6 @@ class ProfileEdit extends React.Component {
                           options={options}
                           onSuccess={(result) => {
                             console.log('picture file');
-                            console.log(result);
-                            console.log(result.filesUploaded[0].url);
                             this.setState({ pictureProfile: result.filesUploaded[0].url });
                           }}
                         />

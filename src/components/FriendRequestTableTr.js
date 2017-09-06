@@ -43,7 +43,6 @@ class FriendRequestTableTr extends React.Component {
       .get(`${process.env.REACT_APP_URL_API}/myUsers/${id}`)
       .set('Authorization', sessionStorage.token)
       .end((err, res) => {
-        console.log(res.body);
         if (res.statusCode === 200) {
           console.log('--- get friend request table tr ---');
           this.setState({ userRender: res.body });
