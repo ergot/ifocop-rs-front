@@ -34,7 +34,6 @@ class ProfileEdit extends React.Component {
           this.inputCoordinates.handleChange({ target: { value: res.body.coordinates } });
           this.inputAge.handleChange({ target: { value: res.body.age } });
           this.inputPresentation.handleChange({ target: { value: res.body.presentation } });
-          this.inputPicture.handleChange({ target: { value: res.body.picture } });
           this.setState({pictureProfile: res.body.pictureProfile})
           this.setState({pictureProfileHeader: res.body.pictureProfileHeader})
         } else {
@@ -101,7 +100,6 @@ class ProfileEdit extends React.Component {
                     <ProfileEditInput label="Coordonnées" updateStateParent={this.updateStateParent} id="coordinates" ref={(input) => { this.inputCoordinates = input; }} />
                     <ProfileEditInput label="Age" updateStateParent={this.updateStateParent} id="age" ref={(input) => { this.inputAge = input; }} />
                     <ProfileEditInput label="Présentation" updateStateParent={this.updateStateParent} id="presentation" ref={(input) => { this.inputPresentation = input; }} />
-                    <ProfileEditInput label="Photo" updateStateParent={this.updateStateParent} id="picture" ref={(input) => { this.inputPicture = input; }} />
                     {/*pictureProfile*/}
                     <div className="form-group">
                       <label htmlFor="definpu" className="col-sm-3 control-label">
