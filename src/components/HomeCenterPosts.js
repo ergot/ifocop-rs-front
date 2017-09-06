@@ -22,96 +22,84 @@ class HomeCenterPosts extends React.Component {
   // {"where":{"parentId": null},  "order": "dateCreated DESC"}
 
   getPosts() {
+    let requestUrl = null;
     if (this.props.path === 'profile') {
-      request
-        .get(`${process.env.REACT_APP_URL_API}/myUsers/${this.props.idUser}/walls?filter={"where":{"parentId": null}, "order": "dateCreated DESC"}`)
-        .set('Authorization', sessionStorage.token)
-        // probleme avec null
-        // .query({ filter: { where: { parentId: 'null' }, order: 'dateCreated DESC' } })
-        .end((err, res) => {
-          if (res.statusCode === 200) {
-            console.log('--- home center posts valide ---');
-            this.setState({ posts: res.body });
-          } else {
-            console.log('--- home center posts error ---');
-          }
-        });
+      requestUrl = `${process.env.REACT_APP_URL_API}/myUsers/${this.props.idUser}/walls?filter={"where":{"parentId": null}, "order": "dateCreated DESC"}`;
     }
 
     if (this.props.path === 'home') {
-      Async.parallel([
-        // recupère tous le wall
-        function (callback) {
-          request
-            .get(`${process.env.REACT_APP_URL_API}/walls?filter={"where":{"parentId": null}, "order": "dateCreated DESC"}`)
-            .set('Authorization', sessionStorage.token)
-            // .query({ filter: { where: { parentId: `null` }, order: 'dateCreated DESC' } })
-            .end((err, res) => {
-              if (res.statusCode === 200) {
-                console.log('--- get wall  ---');
-                callback(null, res.body);
-              } else {
-                console.log('--- get wall error ---');
-              }
-            });
-        },
-        // recupere tous les friends de l user
-        function (callback) {
-          request
-            .get(`${process.env.REACT_APP_URL_API}/friendsLists/getFriendship`)
-            .query({ idUser: sessionStorage.userId, isConfirmed: true })
-            .set('Authorization', sessionStorage.token)
-            .end((err, res) => {
-              if (res.statusCode === 200) {
-                console.log('--- get friendship request  ---');
-                // @warning ...[{}] != [{}, {}]
-                callback(null, res.body.friendship);
-              } else {
-                console.log('--- get friendship request error ---');
-              }
-            });
-        },
-      ], (err, results) => {
-        const idFriends = [];
-        console.log(results[1]);
-        results[1].map((friendship) => {
-          if (friendship.receiver === sessionStorage.userId) {
-            idFriends.push(friendship.sender);
-          } else {
-            idFriends.push(friendship.receiver);
-          }
-        });
-
-        idFriends.push(sessionStorage.userId);
-
-        const posts = [];
-
-        console.log(results[0]);
-        console.log(idFriends);
-        results[0].map((element) => {
-          for (const idFriend of idFriends) {
-            //il faut s assurer qu on est ami avec le sender et receiver du post
-            let friendWithMyUserId = false;
-            let friendWithfriendId = false;
-            if (element.myUserId === idFriend) {
-              friendWithMyUserId = true;
-            }
-
-            if (element.friendId === idFriend) {
-              posts.push(element);
-
-              friendWithfriendId = true;
-            }
-
-            if (friendWithMyUserId && friendWithfriendId) {
-              posts.push(element);
-            }
-          }
-        });
-
-        this.setState({ posts });
-      });
+      requestUrl = `${process.env.REACT_APP_URL_API}/walls?filter={"where":{"parentId": null}, "order": "dateCreated DESC"}`;
     }
+    Async.parallel([
+      // recupère tous le wall
+      function (callback) {
+        request
+          .get(requestUrl)
+          .set('Authorization', sessionStorage.token)
+        // .query({ filter: { where: { parentId: `null` }, order: 'dateCreated DESC' } })
+          .end((err, res) => {
+            if (res.statusCode === 200) {
+              console.log('--- get wall  ---');
+              callback(null, res.body);
+            } else {
+              console.log('--- get wall error ---');
+            }
+          });
+      },
+      // recupere tous les friends de l user
+      function (callback) {
+        request
+          .get(`${process.env.REACT_APP_URL_API}/friendsLists/getFriendship`)
+          .query({ idUser: sessionStorage.userId, isConfirmed: true })
+          .set('Authorization', sessionStorage.token)
+          .end((err, res) => {
+            if (res.statusCode === 200) {
+              console.log('--- get friendship request  ---');
+              // @warning ...[{}] != [{}, {}]
+              callback(null, res.body.friendship);
+            } else {
+              console.log('--- get friendship request error ---');
+            }
+          });
+      },
+    ], (err, results) => {
+      const idFriends = [];
+      //console.log(results[1]);
+      results[1].map((friendship) => {
+        if (friendship.receiver === sessionStorage.userId) {
+          idFriends.push(friendship.sender);
+        } else {
+          idFriends.push(friendship.receiver);
+        }
+      });
+
+      idFriends.push(sessionStorage.userId);
+
+      const posts = [];
+
+      //console.log(results[0]);
+      //console.log(idFriends);
+      results[0].map((element) => {
+        for (const idFriend of idFriends) {
+          // il faut s assurer qu on est ami avec le sender et receiver du post
+          let friendWithMyUserId = false;
+          let friendWithfriendId = false;
+          if (element.myUserId === idFriend) {
+            friendWithMyUserId = true;
+          }
+
+          if (element.friendId === idFriend) {
+            friendWithfriendId = true;
+          }
+
+          if (friendWithMyUserId && friendWithfriendId) {
+            posts.push(element);
+          }
+        }
+      });
+
+      this.setState({ posts });
+    });
   }
 
   componentWillReceiveProps(nextProps) {
