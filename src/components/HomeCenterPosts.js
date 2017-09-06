@@ -73,6 +73,7 @@ class HomeCenterPosts extends React.Component {
         },
       ], (err, results) => {
         const idFriends = [];
+        console.log(results[1]);
         results[1].map((friendship) => {
           if (friendship.receiver === sessionStorage.userId) {
             idFriends.push(friendship.sender);
@@ -80,13 +81,29 @@ class HomeCenterPosts extends React.Component {
             idFriends.push(friendship.receiver);
           }
         });
+
         idFriends.push(sessionStorage.userId);
 
         const posts = [];
 
+        console.log(results[0]);
+        console.log(idFriends);
         results[0].map((element) => {
           for (const idFriend of idFriends) {
+            //il faut s assurer qu on est ami avec le sender et receiver du post
+            let friendWithMyUserId = false;
+            let friendWithfriendId = false;
             if (element.myUserId === idFriend) {
+              friendWithMyUserId = true;
+            }
+
+            if (element.friendId === idFriend) {
+              posts.push(element);
+
+              friendWithfriendId = true;
+            }
+
+            if (friendWithMyUserId && friendWithfriendId) {
               posts.push(element);
             }
           }
