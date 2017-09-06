@@ -20,7 +20,6 @@ class Friends extends React.Component {
       .query({ idUser: sessionStorage.userId, isConfirmed: true })
       .set('Authorization', sessionStorage.token)
       .end((err, res) => {
-        console.log(res.body);
         if (res.statusCode === 200) {
           console.log('--- submit friends  ---');
           const listOfFriends = [];
