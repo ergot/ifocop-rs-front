@@ -46,16 +46,18 @@ class HomeLeftLinks extends React.Component {
 
               <ul className="nav nav-pills nav-stacked">
                 {/* <li className="active"><a href="#"> <i className="fa fa-user" /> News feed</a></li> */}
+                <li><a href="#"> <i className="fa fa-reorder" /> All</a></li>
+                <li><a href="#"> <i className="fa fa-bullhorn" />Messages public</a></li>
                 <li>
                   <a href="#">
-                    <i className="fa fa-envelope" /> Messages
+                    <i className="fa fa-envelope" /> Messages Non Lus
                     <span className="label label-info pull-right r-activity">9</span>
                   </a>
                 </li>
-                <li><a href="#"> <i className="fa fa-calendar" /> Events</a></li>
-                <li><a href="#"> <i className="fa fa-image" /> Photos</a></li>
-                <li><a href="#"> <i className="fa fa-share" /> Browse</a></li>
-                <li><a href="#"> <i className="fa fa-floppy-o" /> Saved</a></li>
+
+                <li><a href="#"> <i className="fa fa-rss" /> En cours</a></li>
+                <li><a href="#"> <i className="fa fa-archive" /> Archivé</a></li>
+                {/*<li><a href="#"> <i className="fa fa-floppy-o" /> Saved</a></li>*/}
               </ul>
             </div>
           </div>
